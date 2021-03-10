@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class Interface {
 	
-	//Methode qui permet de visualiser la grille
-	public static void affichage(Board board) {
+	//Method, print the grid
+	public static void printGrid(Board board) {
 		System.out.print("   00000000001111111\n");
 		System.out.print("   01234567890123456\n");
 		for(int y=16; y>=0;y--) {
@@ -33,9 +33,11 @@ public class Interface {
 		board.setWall(3,4);
 		board.setWall(3,8);
 		board.setWall(6,15);
-		board.setWall(11,10);
+		board.setWall(15,7);
+		board.setWall(5,3);
+		board.setWall(2,3);
 		System.out.print("***Bienvenue au Jeu du Quoridor***\n");
-		System.out.print("Le joueur p1 commence :) \n");
+		System.out.print("Le joueur p1 commence :) (Joueur du Haut) \n");
 		for(int i=0;i<5;i++) {
 			int move;
 			System.out.print("P1 : ");
@@ -46,7 +48,7 @@ public class Interface {
 			case 2 : p1.Move("Left"); break;
 			case 3 : p1.Move("Right"); break;
 			case 4 : p1.Move("Down"); break;
-			default : System.out.print("Gé pas compris\n");
+			default : System.out.print("J'ai pas compris\n");
 			}
 			System.out.print("P2 : ");
 			menuDeplacement(board);
@@ -56,7 +58,7 @@ public class Interface {
 			case 2 : p2.Move("Left"); break;
 			case 3 : p2.Move("Right"); break;
 			case 4 : p2.Move("Down"); break;
-			default : System.out.print("Gé pas compris\n");
+			default : System.out.print("J'ai pas compris\n");
 			}
 		}
 		sc.close();
@@ -69,7 +71,7 @@ public class Interface {
 		System.out.print("3 : Aller à Droite\n");
 		System.out.print("4 : Aller en Bas\n");
 		System.out.print("Voici le plateau :\n");
-		affichage(board);
+		printGrid(board);
 		System.out.print("Votre Choix : ");
 	}
 	
