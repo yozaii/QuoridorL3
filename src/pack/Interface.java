@@ -42,7 +42,7 @@ public class Interface {
 			int move;
 			System.out.print("P1 : ");
 			menuDeplacement(board);
-			move = sc.nextInt();
+			move = UtilEntree.scannerInt(1,4);
 			switch(move) {
 			case 1 : p1.Move("Up"); break;
 			case 2 : p1.Move("Left"); break;
@@ -52,7 +52,7 @@ public class Interface {
 			}
 			System.out.print("P2 : ");
 			menuDeplacement(board);
-			move = sc.nextInt();
+			move = UtilEntree.scannerInt(1,4);
 			switch(move) {
 			case 1 : p2.Move("Up"); break;
 			case 2 : p2.Move("Left"); break;
@@ -72,7 +72,6 @@ public class Interface {
 		System.out.print("4 : Aller en Bas\n");
 		System.out.print("Voici le plateau :\n");
 		printGrid(board);
-		System.out.print("Votre Choix : ");
 	}
 	
 
