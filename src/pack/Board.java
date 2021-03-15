@@ -26,19 +26,23 @@ public class Board {
 	}
 	
 	
-	public void setWall(int x, int y) {
+	public boolean setWall(int x, int y) {
 		if(!(board[x][y].GetIsWallTile()) || board[x][y].GetHasWall() || (x%2==1 && y%2==1) || x>14 || y<2) {
 			System.out.print("Cet emplacement ne peut pas contenir de mur (" + x + "," + y + ")\n");
+			return false;
 		}
 		else if(containsWall(x,y)) {
 			System.out.print("Cet emplacement contient déjà un mur(" + x + "," + y + ")\n");
+			return false;
 		}
 		else {
 			if(y%2==1) for(int i=0;i<3;i++) board[x+i][y].SetHasWall(true);
 			if(x%2==1) for(int i=0;i<3;i++) board[x][y-i].SetHasWall(true);
 			System.out.print("Le mur a été placé\n");
+			return true;
 		}
 	}
+	
 	public boolean containsWall(int x,int y) {
 		if(board[x][y].GetHasWall()) return true;
 		for(int i=0;i<3;i++) {

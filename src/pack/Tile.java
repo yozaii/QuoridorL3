@@ -4,7 +4,7 @@ public class Tile {
 	
 	private boolean isWallTile = false;	//Si la case peut contenir un mur
 	private boolean hasWall = false;	//Si la case contient un mur
-	private boolean hasPawn = false;	//Si la case contient un pion
+	private String hasPawn = "None";	//Si la case contient un pion
 	
 
 	
@@ -19,8 +19,8 @@ public class Tile {
 	}
 	
 	//Modifie la valeur de hasPawn
-	public void SetHasPawn(boolean bool) {
-		if (isWallTile == false) hasPawn = bool;
+	public void SetHasPawn(String color) {
+		if (isWallTile == false) hasPawn = color;
 	}
 	
 	public boolean GetIsWallTile() {
@@ -31,7 +31,7 @@ public class Tile {
 		return hasWall;
 	}
 	
-	public boolean GetHasPawn() {
+	public String GetHasPawn() {
 		return hasPawn;
 	}
 	
