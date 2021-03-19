@@ -7,6 +7,7 @@ public class Pawn {
 	private Board board;
 	private String color;
 	private int yWin;
+	public boolean isWin;
 	
 	//Constructeur
 	public Pawn(Board board, String Color) {
@@ -17,12 +18,14 @@ public class Pawn {
 			this.x = 8;
 			this.y = 16;
 			this.yWin = 0;
+			this.isWin = false;
 		}
 		else if (Color == "Black") {
 			board.GetTile(8, 0).SetHasPawn(Color);
 			this.x = 8;
 			this.y = 0;
 			this.yWin = 16;
+			this.isWin = false;
 		}
 	}
 	
@@ -70,7 +73,8 @@ public class Pawn {
 				board.GetTile(x, y).SetHasPawn("None");
 				board.GetTile(x, y+2).SetHasPawn(this.color);
 				this.y = y+2;
-				if(this.y == this.yWin) result = 2; else result=1;
+				if(this.y == this.yWin) isWin = true;
+				result=1;
 			}
 			else result =-1;
 			break;
@@ -84,7 +88,8 @@ public class Pawn {
 				board.GetTile(x, y).SetHasPawn("None");
 				board.GetTile(x, y-2).SetHasPawn(this.color);
 				this.y = y-2;
-				if(this.y == this.yWin) result = 2; else result=1;
+				if(this.y == this.yWin) isWin = true;
+				result=1;
 			}
 			else result =-1;
 			break;
@@ -110,6 +115,12 @@ public class Pawn {
 	
 	public String getColor() {
 		return this.color;
+	}
+	public int getY() {
+		return y;
+	}
+	public int getYWin() {
+		return yWin;
 	}
 	
 	
