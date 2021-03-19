@@ -42,7 +42,7 @@ public class Pawn {
 				board.GetTile(x, y).SetHasPawn("None");
 				board.GetTile(x+2, y).SetHasPawn(this.color);
 				this.x = x+2;
-				result = 1;
+				result=1;
 			}
 			else result =-1;
 			break;
@@ -56,7 +56,7 @@ public class Pawn {
 				board.GetTile(x, y).SetHasPawn("None");
 				board.GetTile(x-2, y).SetHasPawn(this.color);
 				this.x = x-2;
-				result = 1;
+				result=1;
 			}
 			else result =-1;
 			break;
@@ -70,7 +70,7 @@ public class Pawn {
 				board.GetTile(x, y).SetHasPawn("None");
 				board.GetTile(x, y+2).SetHasPawn(this.color);
 				this.y = y+2;
-				result = 1;
+				if(this.y == this.yWin) result = 2; else result=1;
 			}
 			else result =-1;
 			break;
@@ -84,7 +84,7 @@ public class Pawn {
 				board.GetTile(x, y).SetHasPawn("None");
 				board.GetTile(x, y-2).SetHasPawn(this.color);
 				this.y = y-2;
-				result = 1;
+				if(this.y == this.yWin) result = 2; else result=1;
 			}
 			else result =-1;
 			break;
@@ -95,7 +95,7 @@ public class Pawn {
 			break;
 		
 		}
-		
+		System.out.print("+ " + result + " "); PrintPosition(); 
 		return result;
 	}
 	

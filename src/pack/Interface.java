@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class Interface {
 	
+	private static int result;
+	
 	/**
 	 * Method which print the grid with walls and pawn
 	 * @param board
@@ -33,10 +35,16 @@ public class Interface {
 		Pawn p1 = new Pawn(board, "White");
 		Pawn p2 = new Pawn(board, "Black");
 		System.out.print("---BIENVENUE AU JEU DU QUORIDOR---\n");
-		for(int i=0;i<5;i++) {
+		while(result != 2) {
 			menuBase(p1,board);
-			menuBase(p2,board);
+			if(result != 2) {
+				menuBase(p2,board);
+			}
 		}
+		System.out.print("************************************************************\n");
+		System.out.print("|     BRAVO LA PARTIE EST FINIE, VOUS AVEZ GAGNE !! ^^     |\n");
+		System.out.print("************************************************************\n\n\n");
+		printGrid(board);
 		sc.close();
 	}
 	
@@ -79,10 +87,10 @@ public class Interface {
 		printMenuDeplacement(board);
 		int choice = UtilEntree.scannerInt(1,4);
 		switch(choice) {
-		case 1 : player.Move("Up"); break;
-		case 2 : player.Move("Left"); break;
-		case 3 : player.Move("Right"); break;
-		case 4 : player.Move("Down"); break;
+		case 1 : result = player.Move("Up"); break;
+		case 2 : result = player.Move("Left"); break;
+		case 3 : result = player.Move("Right"); break;
+		case 4 : result = player.Move("Down"); break;
 		default : System.out.print("J'ai pas compris\n");
 		}
 	}
