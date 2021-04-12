@@ -3,7 +3,6 @@ package pack;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-
 public class Pawn {
 	
 	private int x;
@@ -189,7 +188,6 @@ public class Pawn {
 			
 		case "Down":
 			
-			
 			if (board.GetTile(x, y-2).GetHasPawn()=="None") {
 				board.GetTile(x, y).SetHasPawn("None");
 				board.GetTile(x, y-2).SetHasPawn(this.color);
@@ -256,7 +254,6 @@ public class Pawn {
 		this.numWalls--;
 		System.out.println(this.numWalls);
 	}
-	
 	public void PrintPosition() {
 		System.out.println("x: " + x + " y: " + y);
 	}
@@ -273,7 +270,6 @@ public class Pawn {
 	public int getNumWalls() {
 		return this.numWalls;
 	}
-	
 	
 	
 	

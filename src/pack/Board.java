@@ -26,6 +26,7 @@ public class Board {
 	}
 	
 	
+
 	public boolean setWall(int x, int y, Pawn player) {
 		if(!(board[x][y].GetIsWallTile()) || board[x][y].GetHasWall() || (x%2==1 && y%2==1) || x>14 || y<2) {
 			System.out.print("Cet emplacement ne peut pas contenir de mur (" + x + "," + y + ")\n");
@@ -36,7 +37,7 @@ public class Board {
 			return false;
 		}
 		else if(player.getNumWalls()==0) {
-			System.out.print("Vous avez plus de murs à emplacer\n");
+			System.out.print("Vous avez plus de murs ï¿½ emplacer\n");
 			return false;
 		}
 		else {
