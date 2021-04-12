@@ -21,14 +21,12 @@ public class Pawn {
 			this.x = 8;
 			this.y = 16;
 			this.yWin = 0;
-			this.isWin = false;
 		}
 		else if (Color == "Black") {
 			board.GetTile(8, 0).SetHasPawn(Color);
 			this.x = 8;
 			this.y = 0;
 			this.yWin = 16;
-			this.isWin = false;
 		}
 		this.numWalls = 10;
 	}
@@ -267,12 +265,6 @@ public class Pawn {
 	
 	public String getColor() {
 		return this.color;
-	}
-	public int getY() {
-		return y;
-	}
-	public int getYWin() {
-		return yWin;
 	}
 	
 	public int getNumWalls() {
