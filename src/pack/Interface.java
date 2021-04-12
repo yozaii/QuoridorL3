@@ -1,6 +1,8 @@
 package pack;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Interface {
 	
@@ -73,24 +75,29 @@ public class Interface {
 		}
 	}
 	
-	public static void printMenuDeplacement(Board board) {
-		System.out.print("************************************\n");
-		System.out.print("|     Voici vos Possibilités :     |\n");
-		System.out.print("|     1 : Aller en Haut            |\n");
-		System.out.print("|     2 : Aller à Gauche           |\n");
-		System.out.print("|     3 : Aller à Droite           |\n");
-		System.out.print("|     4 : Aller en Bas             |\n");
-		System.out.print("************************************\n");
+	public static void printMenuDeplacement(Pawn player, Board board) {
+		ArrayList<String> possibleMoves = player.possibleMoves();
+		
+		System.out.print("*****************************************\n");
+		System.out.print("|\tVoici vos Possibilités :\t|\n");
+		for (int i=0; i<possibleMoves.size(); i++)
+			System.out.println("|\t" + (i+1) + " " + possibleMoves.get(i) +"\t\t\t\t|");
+		System.out.print("*****************************************\n");
 	}
 	
 	public static void menuDeplacement(Pawn player, Board board) {
-		printMenuDeplacement(board);
-		int choice = UtilEntree.scannerInt(1,4);
+		printMenuDeplacement(player, board);
+		ArrayList<String> possibleMoves = player.possibleMoves();
+		int choice = UtilEntree.scannerInt(1,possibleMoves.size());
 		switch(choice) {
-		case 1 : result = player.Move("Up"); break;
-		case 2 : result = player.Move("Left"); break;
-		case 3 : result = player.Move("Right"); break;
-		case 4 : result = player.Move("Down"); break;
+		case 1 : result = player.Move(possibleMoves.get(0)); break;
+		case 2 : result = player.Move(possibleMoves.get(1)); break;
+		case 3 : result = player.Move(possibleMoves.get(2)); break;
+		case 4 : result = player.Move(possibleMoves.get(3)); break;
+		case 5 : result = player.Move(possibleMoves.get(4)); break;
+		case 6 : result = player.Move(possibleMoves.get(5)); break;
+		case 7 : result = player.Move(possibleMoves.get(6)); break;
+		case 8 : result = player.Move(possibleMoves.get(7)); break;
 		default : System.out.print("J'ai pas compris\n");
 		}
 	}
@@ -102,7 +109,7 @@ public class Interface {
 			int x = UtilEntree.scannerInt(0,16);
 			System.out.print("y : ");
 			int y = UtilEntree.scannerInt(0,16);
-			isSet = board.setWall(x, y);
+			isSet = board.setWall(x, y,player);
 		} while (!isSet);
 	}
 	
