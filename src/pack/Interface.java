@@ -6,8 +6,6 @@ import java.util.Set;
 
 public class Interface {
 	
-	private static int result;
-	
 	/**
 	 * Method which print the grid with walls and pawn
 	 * @param board
@@ -37,15 +35,15 @@ public class Interface {
 		Pawn p1 = new Pawn(board, "White");
 		Pawn p2 = new Pawn(board, "Black");
 		System.out.print("---BIENVENUE AU JEU DU QUORIDOR---\n");
-		while(result != 2) {
+		while(!p1.isWin && !p2.isWin) {
 			menuBase(p1,board);
-			if(result != 2) {
+			if(!p1.isWin) {
 				menuBase(p2,board);
 			}
 		}
-		System.out.print("************************************************************\n");
-		System.out.print("|     BRAVO LA PARTIE EST FINIE, VOUS AVEZ GAGNE !! ^^     |\n");
-		System.out.print("************************************************************\n\n\n");
+		System.out.print("*************************************************************\n");
+		System.out.print("|     BRAVO LA PARTIE EST FINIE, VOUS AVEZ GAGNEE !! ^^     |\n");
+		System.out.print("*************************************************************\n\n\n");
 		printGrid(board);
 		sc.close();
 	}
