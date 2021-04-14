@@ -28,7 +28,7 @@ public class Board {
 	
 
 	public boolean setWall(int x, int y, Pawn player) {
-		if(!(board[x][y].GetIsWallTile()) || board[x][y].GetHasWall() || (x%2==1 && y%2==1) || x>14 || y<2) {
+		if(!(board[x][y].GetIsWallTile()) || board[x][y].GetHasWall() || (x%2==1 && y%2==1) || x==16 || y==0) {
 			System.out.print("Cet emplacement ne peut pas contenir de mur (" + x + "," + y + ")\n");
 			return false;
 		}
