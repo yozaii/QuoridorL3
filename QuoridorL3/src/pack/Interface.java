@@ -68,7 +68,14 @@ public class Interface {
 		int choice = UtilEntree.scannerInt(1,4);
 		switch(choice) {
 		case 1 : menuDeplacement(player,board); break;
-		case 2 : menuWall(player,board); break;
+		case 2 : if (player.getNumWalls()> 0) {
+					menuWall(player, board);
+				}
+				else {
+					System.out.println("Vous n'avez plus de mur!");
+					menuBase(player, board);
+				}
+				break;
 		case 3 : System.out.print("Au Revoir"); break;
 		case 4 : player.Move("Down"); break;
 		default : System.out.print("J'ai pas compris\n");

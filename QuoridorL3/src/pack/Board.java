@@ -25,8 +25,7 @@ public class Board {
 		}
 	}
 	
-	
-
+	/*Place un mur d'une longueur de 3*/
 	public boolean setWall(int x, int y, Pawn player) {
 		if(!(board[x][y].GetIsWallTile()) || board[x][y].GetHasWall() || (x%2==1 && y%2==1) || x>14 || y<2) {
 			System.out.print("Cet emplacement ne peut pas contenir de mur (" + x + "," + y + ")\n");
@@ -37,7 +36,7 @@ public class Board {
 			return false;
 		}
 		else if(player.getNumWalls()==0) {
-			System.out.print("Vous avez plus de murs ï¿½ emplacer\n");
+			System.out.print("Vous avez plus de murs à emplacer\n");
 			return false;
 		}
 		else {
@@ -49,6 +48,17 @@ public class Board {
 		}
 	}
 	
+	/*Cree une clone du board*/
+	public Board clone() {
+		Board b = new Board();//Board clone
+		for (int i=0; i<b.getDimension(); i++)
+			for (int j=0; j<b.getDimension(); j++) {
+				b.setTile(i, j, this.board[i][j]);//Le Tile du nouveau board = Tile du this board
+			}
+		
+		return b;
+	}
+	
 	public boolean containsWall(int x,int y) {
 		if(board[x][y].GetHasWall()) return true;
 		for(int i=0;i<3;i++) {
@@ -57,9 +67,16 @@ public class Board {
 		}
 		return false;
 	}
+	
 	public Tile GetTile(int x, int y) {
 		return board[x][y];
 	}
+	
+	
+	public void setTile(int x, int y, Tile t) {
+		this.board[x][y] = t.clone();
+	}
+	
 	public int getDimension() {
 		return dimension;
 	}
