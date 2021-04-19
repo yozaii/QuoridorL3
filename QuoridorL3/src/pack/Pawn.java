@@ -129,6 +129,52 @@ public class Pawn {
 		return possibleMoves;
 	}
 	
+	public String oppositeMove(String move) {
+		String opp;
+		
+		switch (move) {
+		
+		case "Right":
+			opp = "Left";
+			break;
+			
+		case "Left":
+			opp = "Right";
+			break;
+			
+		case "Up":
+			opp = "Down";
+			break;
+			
+		case "Down":
+			opp = "Up";
+			break;
+			
+		case "Down-Right":
+			opp = "Up-Left";
+			break;
+			
+		case "Down-Left":
+			opp = "Up-Right";
+			break;
+			
+
+		case "Up-Right":
+			opp = "Down-Left";
+			break;
+			
+		case "Up-Left":
+			opp = "Down-Right";
+			break;
+			
+		default:
+			opp = "Error";
+			break;
+		}
+		
+		return opp;
+	}
+	
 	
 	
 	
