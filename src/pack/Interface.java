@@ -103,6 +103,7 @@ public class Interface {
 	
 	public static void menuWall(Pawn player, Board board) {
 		boolean isSet = false;
+		System.out.println("Nombre de murs restants : " + player.getNumWalls());
 		do {
 			System.out.print("x : ");
 			int x = UtilEntree.scannerInt(0,16);

@@ -255,8 +255,11 @@ public class Pawn {
 	
 	//Retire 1 de numWalls
 	public void decreaseNumWalls() {
-		//this.numWalls--;
+		this.numWalls--;
 		//System.out.println(this.numWalls);
+	}
+	public void increaseNumWalls() {
+		this.numWalls++;
 	}
 	public void PrintPosition() {
 		System.out.println("x: " + x + " y: " + y);

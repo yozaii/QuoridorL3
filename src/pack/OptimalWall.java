@@ -22,6 +22,7 @@ public class OptimalWall {
                         bestWall = AStar.AlgoAStar(player, board).size();
                         xWall = x-2;
                         YWall = y-1;
+                        player.increaseNumWalls();
                     }
                     board.removeWall(x-2, y-1);
                 }
@@ -31,6 +32,7 @@ public class OptimalWall {
                     bestWall = AStar.AlgoAStar(player, board).size();
                     xWall = x;
                     YWall = y-1;
+                    player.increaseNumWalls();
                 }
                 board.removeWall(x, y-1);
             }
@@ -42,6 +44,7 @@ public class OptimalWall {
                         bestWall = AStar.AlgoAStar(player, board).size();
                         xWall = x-1;
                         YWall = y+2;
+                        player.increaseNumWalls();
                     }
                     board.removeWall(x-1, y+2);
                 }
@@ -50,6 +53,7 @@ public class OptimalWall {
                         bestWall = AStar.AlgoAStar(player, board).size();
                         xWall = x-2;
                         YWall = y+1;
+                        player.increaseNumWalls();
                     }
                     board.removeWall(x-2, y+1);
                 }
@@ -60,6 +64,7 @@ public class OptimalWall {
                         bestWall = AStar.AlgoAStar(player, board).size();
                         xWall = x+1;
                         YWall = y+2;
+                        player.increaseNumWalls();
                     }
                     board.removeWall(x+1, y+2);
                 }
@@ -69,6 +74,7 @@ public class OptimalWall {
                     bestWall = AStar.AlgoAStar(player, board).size();
                     xWall = x;
                     YWall = y+1;
+                    player.increaseNumWalls();
                 }
                 board.removeWall(x, y+1);
             }
@@ -79,6 +85,7 @@ public class OptimalWall {
                     bestWall = AStar.AlgoAStar(player, board).size();
                     xWall = x-1;
                     YWall = y;
+                    player.increaseNumWalls();
                 }
                 board.removeWall(x-1, y);
             }
@@ -89,6 +96,7 @@ public class OptimalWall {
                     bestWall = AStar.AlgoAStar(player, board).size();
                     xWall = x+1;
                     YWall = y;
+                    player.increaseNumWalls();
                 }
                 board.removeWall(x+1, y);
             }
