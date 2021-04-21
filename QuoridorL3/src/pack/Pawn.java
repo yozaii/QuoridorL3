@@ -29,7 +29,7 @@ public class Pawn {
 			this.y = 0;
 			this.yWin = 16;
 		}
-		this.numWalls = 1;
+		this.numWalls = 10;
 	}
 	
 	public Pawn(Board board,int x,int y) {
@@ -298,7 +298,6 @@ public class Pawn {
 			break;
 		
 		}
-		System.out.print("+ " + result + " "); PrintPosition(); 
 		return result;
 	}
 	

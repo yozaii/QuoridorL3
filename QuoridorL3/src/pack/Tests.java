@@ -16,7 +16,7 @@ public class Tests {
 		Interface.printGrid(board);
 		
 		int depth = 9;
-		String[] s = AI.miniMax(board, false, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, p1, p2);
+		String[] s = AI.miniMax(board, true, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, p1, p2);
 		Interface.printGrid(board);
 		//String[] s = AI.miniMaxNaive(board, true, depth,  p1, p2);
 		System.out.println (s[0] + s[1]);
