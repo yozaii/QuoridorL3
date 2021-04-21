@@ -110,6 +110,11 @@ public class OptimalWall {
 
         int bestWall = AStar.AlgoAStar(player, board).size();
 
+        if(bestWall < optimalWall1(player, board)) {
+            bestWall = optimalWall1(player, board);
+            xWall = optimalX;
+            YWall = optimalY;
+        }
         for(int i : AStar.AlgoAStar(player, board)) {
             x = i%17;
             y = i/17;
