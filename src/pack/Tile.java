@@ -5,7 +5,6 @@ public class Tile {
 	private boolean isWallTile = false;	//Si la case peut contenir un mur
 	private boolean hasWall = false;	//Si la case contient un mur
 	private String hasPawn = "None";	//Si la case contient un pion
-	
 
 	
 	//Modifie la valeur de isWall

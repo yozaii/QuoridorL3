@@ -28,6 +28,12 @@ public class Pawn {
 		}
 		this.numWalls = 10;
 	}
+	public Pawn(Board board,int x,int y) {
+		this.board = board;
+		this.x=x;
+		this.y=y;
+		this.numWalls=10;
+	}
 	
 	
 	
@@ -249,8 +255,8 @@ public class Pawn {
 	
 	//Retire 1 de numWalls
 	public void decreaseNumWalls() {
-		this.numWalls--;
-		System.out.println(this.numWalls);
+		//this.numWalls--;
+		//System.out.println(this.numWalls);
 	}
 	public void PrintPosition() {
 		System.out.println("x: " + x + " y: " + y);
@@ -261,12 +267,22 @@ public class Pawn {
 		else return false;
 	}
 	
+	public int getX() {
+		return this.x;
+	}
+	public int getY() {
+		return this.y;
+	}
 	public String getColor() {
 		return this.color;
 	}
 	
 	public int getNumWalls() {
 		return this.numWalls;
+	}
+
+	public int getYWin() {
+		return this.yWin;
 	}
 	
 	

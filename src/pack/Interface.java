@@ -69,8 +69,8 @@ public class Interface {
 		case 1 : menuDeplacement(player,board); break;
 		case 2 : menuWall(player,board); break;
 		case 3 : System.out.print("Au Revoir"); break;
-		case 4 : player.Move("Down"); break;
-		default : System.out.print("J'ai pas compris\n");
+		case 4 : OptimalWall.optimalWall2(player, board);; break;
+		default : System.out.print("Je n'ai pas compris\n");
 		}
 	}
 	
