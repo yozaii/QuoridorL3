@@ -32,7 +32,12 @@ public class Pawn {
 		this.numWalls = 1;
 	}
 	
-	
+	public Pawn(Board board,int x,int y) {
+		this.board = board;
+		this.x=x;
+		this.y=y;
+		this.numWalls=10;
+	}
 	
 	//Methode pour renvoyer un set des deplacements possible
 	public ArrayList<String> possibleMoves() {
@@ -303,6 +308,10 @@ public class Pawn {
 		System.out.println("Walls:" + this.numWalls);
 	}
 	
+	public void increaseNumWalls() {
+		this.numWalls++;
+	}
+	
 	public void PrintPosition() {
 		System.out.println("x: " + x + " y: " + y);
 	}
@@ -330,6 +339,17 @@ public class Pawn {
 		return this.numWalls;
 	}
 	
+	public int getX() {
+		return this.x;
+	}
+	
+	public int getY() {
+		return this.y;
+	}
+	
+	public int getYWin() {
+		return this.yWin;
+	}
 	
 	
 	

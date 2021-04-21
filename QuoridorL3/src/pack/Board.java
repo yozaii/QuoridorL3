@@ -68,6 +68,11 @@ public class Board {
 		return false;
 	}
 	
+	public void removeWall(int x,int y){
+		if(y%2==1) for(int i=0;i<3;i++) board[x+i][y].SetHasWall(false);
+			if(x%2==1) for(int i=0;i<3;i++) board[x][y-i].SetHasWall(false);
+	}
+	
 	public Tile GetTile(int x, int y) {
 		return board[x][y];
 	}
