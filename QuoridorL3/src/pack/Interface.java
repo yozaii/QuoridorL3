@@ -50,6 +50,49 @@ public class Interface {
 		sc.close();
 	}
 	
+	//Menu avec l'IA qui jouent le pion blanc
+	public static void menuIA1(int depth) {
+		Scanner sc = new Scanner(System.in);
+		Board board = new Board();
+		Pawn p1 = new Pawn(board, "White");
+		Pawn p2 = new Pawn(board, "Black");
+		System.out.print("---BIENVENUE AU JEU DU QUORIDOR---\n");
+		while(result != 2) {
+			String[] s = AI.miniMax(board, true, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, p1, p2);
+			result = p1.Move(s[1]);
+			if(result != 2) {
+				menuBase(p2,board);
+			}
+		}
+		System.out.print("************************************************************\n");
+		System.out.print("|     BRAVO LA PARTIE EST FINIE, VOUS AVEZ GAGNE !! ^^     |\n");
+		System.out.print("************************************************************\n\n\n");
+		printGrid(board);
+		sc.close();
+	}
+	
+	//Menu avec l'IA qui jouent le pion noir
+	public static void menuIA2(int depth) {
+		Scanner sc = new Scanner(System.in);
+		Board board = new Board();
+		Pawn p1 = new Pawn(board, "White");
+		Pawn p2 = new Pawn(board, "Black");
+		System.out.print("---BIENVENUE AU JEU DU QUORIDOR---\n");
+		while(result != 2) {
+			menuBase(p1,board);
+			if(result != 2) {
+				String[] s = AI.miniMax(board, false, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, p1, p2);
+				result = p2.Move(s[1]);
+			}
+		}
+		System.out.print("************************************************************\n");
+		System.out.print("|     BRAVO LA PARTIE EST FINIE, VOUS AVEZ GAGNE !! ^^     |\n");
+		System.out.print("************************************************************\n\n\n");
+		printGrid(board);
+		sc.close();
+	}
+
+	
 	public static void printMenuBase(Board board) {
 		System.out.print("************************************\n");
 		System.out.print("|     Voici vos Possibilités :     |\n");
@@ -68,7 +111,14 @@ public class Interface {
 		int choice = UtilEntree.scannerInt(1,4);
 		switch(choice) {
 		case 1 : menuDeplacement(player,board); break;
-		case 2 : menuWall(player,board); break;
+		case 2 : if (player.getNumWalls()> 0) {
+					menuWall(player, board);
+				}
+				else {
+					System.out.println("Vous n'avez plus de mur!");
+					menuBase(player, board);
+				}
+				break;
 		case 3 : System.out.print("Au Revoir"); break;
 		case 4 : player.Move("Down"); break;
 		default : System.out.print("J'ai pas compris\n");

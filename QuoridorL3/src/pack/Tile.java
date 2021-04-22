@@ -6,7 +6,14 @@ public class Tile {
 	private boolean hasWall = false;	//Si la case contient un mur
 	private String hasPawn = "None";	//Si la case contient un pion
 	
-
+	
+	public Tile clone() {
+		Tile t = new Tile();
+		t.SetIsWallTile(this.isWallTile);
+		t.SetHasWall(this.hasWall);
+		t.SetHasPawn(this.hasPawn);
+		return t;
+	}
 	
 	//Modifie la valeur de isWall
 	public void SetIsWallTile(boolean bool) {
