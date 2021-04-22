@@ -38,9 +38,9 @@ public class Interface {
 		Pawn p2 = new Pawn(board, "Black");
 		System.out.print("---BIENVENUE AU JEU DU QUORIDOR---\n");
 		while(result != 2) {
-			menuBase(p1,board);
+			menuBase(p1,board, p2);
 			if(result != 2) {
-				menuBase(p2,board);
+				menuBase(p2,board, p1);
 			}
 		}
 		System.out.print("************************************************************\n");
@@ -65,7 +65,7 @@ public class Interface {
 				int commaIndex = s[1].indexOf(',');
 				int xWall = Integer.parseInt(s[1].substring(0, commaIndex));
 				int yWall = Integer.parseInt(s[1].substring(commaIndex+1, s[1].length()));
-				board.setWall(xWall, yWall, p2);
+				board.setWall(xWall, yWall, p2, p2);
 			}
 			
 			//If move is pawn move
@@ -73,7 +73,7 @@ public class Interface {
 				result = p1.Move(s[1]);
 			}
 			if(result != 2) {
-				menuBase(p2,board);
+				menuBase(p2,board, p1);
 			}
 		}
 		System.out.print("************************************************************\n");
@@ -91,7 +91,7 @@ public class Interface {
 		Pawn p2 = new Pawn(board, "Black");
 		System.out.print("---BIENVENUE AU JEU DU QUORIDOR---\n");
 		while(result != 2) {
-			menuBase(p1,board);
+			menuBase(p1,board, p2);
 			if(result != 2) {
 				String[] s = AI.miniMax(board, false, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, p1, p2);
 				
@@ -100,7 +100,7 @@ public class Interface {
 					int commaIndex = s[1].indexOf(',');
 					int xWall = Integer.parseInt(s[1].substring(0, commaIndex));
 					int yWall = Integer.parseInt(s[1].substring(commaIndex+1, s[1].length()));
-					board.setWall(xWall, yWall, p2);
+					board.setWall(xWall, yWall, p2, p1);
 				}
 				
 				//If move is pawn move
@@ -130,18 +130,18 @@ public class Interface {
 		printGrid(board);
 	}
 	
-	public static void menuBase(Pawn player, Board board) {
+	public static void menuBase(Pawn player, Board board, Pawn player2) {
 		System.out.print(player.getColor() + ":\n");
 		printMenuBase(board);
 		int choice = UtilEntree.scannerInt(1,4);
 		switch(choice) {
 		case 1 : menuDeplacement(player,board); break;
 		case 2 : if (player.getNumWalls()> 0) {
-					menuWall(player, board);
+					menuWall(player, board, player2);
 				}
 				else {
 					System.out.println("Vous n'avez plus de mur!");
-					menuBase(player, board);
+					menuBase(player, board, player2);
 				}
 				break;
 		case 3 : System.out.print("Au Revoir"); break;
@@ -177,14 +177,14 @@ public class Interface {
 		}
 	}
 	
-	public static void menuWall(Pawn player, Board board) {
+	public static void menuWall(Pawn player, Board board, Pawn player2) {
 		boolean isSet = false;
 		do {
 			System.out.print("x : ");
 			int x = UtilEntree.scannerInt(0,16);
 			System.out.print("y : ");
 			int y = UtilEntree.scannerInt(0,16);
-			isSet = board.setWall(x, y,player);
+			isSet = board.setWall(x, y, player, player2);
 		} while (!isSet);
 	}
 	

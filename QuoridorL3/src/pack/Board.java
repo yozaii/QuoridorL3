@@ -47,13 +47,14 @@ public class Board {
 			if(x%2==1) for(int i=0;i<3;i++) board[x][y-i].SetHasWall(true);
 			LinkedList<Integer> l = AStar.AlgoAStar(player, this);
 			LinkedList<Integer> l2 = AStar.AlgoAStar(player2, this);
+
 			if (l2.size() ==0 || l.size() == 0 ) {
 				System.out.print("Vous ne pouvez pas completement bloquer les pions");
 				this.undoWall(x, y, player);
 				return false;
 			}
 			
-			System.out.print("Le mur a été placé\n");
+			System.out.print("Le mur a été placé x: " + x + "y: " + y);
 			player.decreaseNumWalls();
 			return true;
 		}

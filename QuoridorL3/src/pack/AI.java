@@ -65,7 +65,7 @@ public class AI {
 			
 			
 			ArrayList<String> pMoves = p1.possibleMoves();
-			ArrayList<Integer> optWalls = OptimalWall.optimalWall2(p1, board);
+			ArrayList<Integer> optWalls = OptimalWall.optimalWall2(p1, p2, board);
 			
 			/*Transformation des list int a des list string*/
 			ArrayList<String> newOptWalls = new ArrayList<>(optWalls.size());
@@ -92,7 +92,7 @@ public class AI {
 					move = combination.get(i) + "," + combination.get(i+1);
 					int xWall = Integer.parseInt(combination.get(i));
 					int yWall = Integer.parseInt(combination.get(i+1));
-					board.setWall(xWall, yWall, p1);
+					board.setWall(xWall, yWall, p1, p2);
 				}
 				
 				
@@ -132,7 +132,7 @@ public class AI {
 			minEval = Integer.MAX_VALUE;
 			
 			ArrayList<String> pMoves = p2.possibleMoves();
-			ArrayList<Integer> optWalls = OptimalWall.optimalWall2(p2, board);
+			ArrayList<Integer> optWalls = OptimalWall.optimalWall2(p2, p1, board);
 			
 			/*Transformation des list int a des list string*/
 			ArrayList<String> newOptWalls = new ArrayList<>(optWalls.size());
@@ -158,7 +158,7 @@ public class AI {
 					move = combination.get(i) + "," + combination.get(i+1);
 					int xWall = Integer.parseInt(combination.get(i));
 					int yWall = Integer.parseInt(combination.get(i+1));
-					board.setWall(xWall, yWall, p2);
+					board.setWall(xWall, yWall, p2, p1);
 				}
 				
 				
