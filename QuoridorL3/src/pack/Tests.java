@@ -1,5 +1,6 @@
 package pack;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -15,11 +16,16 @@ public class Tests {
 		Pawn p2 = new Pawn(board, "Black");
 		Interface.printGrid(board);
 		
-		int depth = 9;
+		int depth = 5;
 		String[] s = AI.miniMax(board, true, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, p1, p2);
 		Interface.printGrid(board);
 		//String[] s = AI.miniMaxNaive(board, true, depth,  p1, p2);
-		System.out.println (s[0] + s[1]);
+		
+		//ArrayList <Integer> l = OptimalWall.optimalWall2(p1, board);
+		//System.out.println(l);
+
+		System.out.println(p1.getNumWalls());
+		System.out.println (s[0] + "Move: " + s[1]);
 		
 		
 		long endTime = System.nanoTime();

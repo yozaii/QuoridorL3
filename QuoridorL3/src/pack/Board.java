@@ -1,5 +1,7 @@
 package pack;
 
+import java.util.LinkedList;
+
 public class Board {
 
 	private Tile[][] board;	//Le plateau
@@ -26,11 +28,12 @@ public class Board {
 	}
 	
 	/*Place un mur d'une longueur de 3*/
-	public boolean setWall(int x, int y, Pawn player) {
+	public boolean setWall(int x, int y, Pawn player, Pawn player2) {
+		
 		if(!(board[x][y].GetIsWallTile()) || board[x][y].GetHasWall() || (x%2==1 && y%2==1)  || x==16 || y==0) {
 			System.out.print("Cet emplacement ne peut pas contenir de mur (" + x + "," + y + ")\n");
 			return false;
-		}
+		} 
 		else if(containsWall(x,y)) {
 			System.out.print("Cet emplacement contient déjà un mur(" + x + "," + y + ")\n");
 			return false;
@@ -42,10 +45,25 @@ public class Board {
 		else {
 			if(y%2==1) for(int i=0;i<3;i++) board[x+i][y].SetHasWall(true);
 			if(x%2==1) for(int i=0;i<3;i++) board[x][y-i].SetHasWall(true);
+			LinkedList<Integer> l = AStar.AlgoAStar(player, this);
+			LinkedList<Integer> l2 = AStar.AlgoAStar(player2, this);
+			if (l2.size() ==0 || l.size() == 0 ) {
+				System.out.print("Vous ne pouvez pas completement bloquer les pions");
+				this.undoWall(x, y, player);
+				return false;
+			}
+			
 			System.out.print("Le mur a été placé\n");
 			player.decreaseNumWalls();
 			return true;
 		}
+	}
+	
+	public void undoWall(int x, int y, Pawn player) {
+		if(y%2==1) for(int i=0;i<3;i++) board[x+i][y].SetHasWall(false);
+		if(x%2==1) for(int i=0;i<3;i++) board[x][y-i].SetHasWall(false);
+		System.out.print("Le mur a été enleve\n");
+		player.increaseNumWalls();
 	}
 	
 	/*Cree une clone du board*/

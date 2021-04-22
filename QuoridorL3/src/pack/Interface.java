@@ -59,7 +59,19 @@ public class Interface {
 		System.out.print("---BIENVENUE AU JEU DU QUORIDOR---\n");
 		while(result != 2) {
 			String[] s = AI.miniMax(board, true, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, p1, p2);
-			result = p1.Move(s[1]);
+			System.out.println (s[0] + "Move: " + s[1]);
+			//If move is wall move
+			if (s[1].contains(",")) {
+				int commaIndex = s[1].indexOf(',');
+				int xWall = Integer.parseInt(s[1].substring(0, commaIndex));
+				int yWall = Integer.parseInt(s[1].substring(commaIndex+1, s[1].length()));
+				board.setWall(xWall, yWall, p2);
+			}
+			
+			//If move is pawn move
+			else {
+				result = p1.Move(s[1]);
+			}
 			if(result != 2) {
 				menuBase(p2,board);
 			}
@@ -82,7 +94,20 @@ public class Interface {
 			menuBase(p1,board);
 			if(result != 2) {
 				String[] s = AI.miniMax(board, false, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, p1, p2);
-				result = p2.Move(s[1]);
+				
+				//If move is wall move
+				if (s[1].contains(",")) {
+					int commaIndex = s[1].indexOf(',');
+					int xWall = Integer.parseInt(s[1].substring(0, commaIndex));
+					int yWall = Integer.parseInt(s[1].substring(commaIndex+1, s[1].length()));
+					board.setWall(xWall, yWall, p2);
+				}
+				
+				//If move is pawn move
+				else {
+					result = p2.Move(s[1]);
+				}
+
 			}
 		}
 		System.out.print("************************************************************\n");

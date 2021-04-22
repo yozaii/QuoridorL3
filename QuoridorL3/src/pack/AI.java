@@ -1,5 +1,8 @@
 package pack;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 public class AI {
 	
 	/*
@@ -55,18 +58,60 @@ public class AI {
 		float minEval;
 		float currentEval;
 		
+		
 		if (maxPlayer) {	//Joueur max (p1)
 			
 			maxEval = Integer.MIN_VALUE;
 			
+			
+			ArrayList<String> pMoves = p1.possibleMoves();
+			ArrayList<Integer> optWalls = OptimalWall.optimalWall2(p1, board);
+			
+			/*Transformation des list int a des list string*/
+			ArrayList<String> newOptWalls = new ArrayList<>(optWalls.size());
+			for (Integer myInt : optWalls) { 
+				newOptWalls.add(String.valueOf(myInt)); 
+			}
+			
+			
+			/*La combinaison des possible moves avec optimalWall*/
+			ArrayList<String> combination = new ArrayList<String>(pMoves);
+			combination.addAll(newOptWalls);
+			
+			
 			//Boucles pour tous les moves possibles
-			for (int i =0; i < p1.possibleMoves().size(); i++) {
+			for (int i =0; i < combination.size(); i++) {
 				
-				move = p1.possibleMoves().get(i);
-				p1.Move(move);
+				//Pawn move
+				if (i < pMoves.size()) {
+					move = combination.get(i);
+					p1.Move(move);
+				}
+				//Wall placement
+				else {
+					move = combination.get(i) + "," + combination.get(i+1);
+					int xWall = Integer.parseInt(combination.get(i));
+					int yWall = Integer.parseInt(combination.get(i+1));
+					board.setWall(xWall, yWall, p1);
+				}
+				
+				
 				retHolder = miniMax(board, false, depth-1, alpha, beta, p1, p2);
 				currentEval = Float.parseFloat(retHolder[0]);
-				p1.Move(p1.oppositeMove(move));//Annule le deplacement effectuer precedemment
+				
+				
+				//Pawn move
+				if (i < pMoves.size()) {
+					move = combination.get(i);
+					p1.Move(p1.oppositeMove(move));//Annule le deplacement effectuer precedemment
+				}
+				//Wall placement
+				else {
+					int xWall = Integer.parseInt(combination.get(i));
+					int yWall = Integer.parseInt(combination.get(i+1));
+					board.undoWall(xWall, yWall, p1);//Annule le mur placer precedemment
+					i++;
+				}
 				
 				if (currentEval > maxEval) {
 					maxEval = currentEval;
@@ -86,14 +131,53 @@ public class AI {
 			
 			minEval = Integer.MAX_VALUE;
 			
+			ArrayList<String> pMoves = p2.possibleMoves();
+			ArrayList<Integer> optWalls = OptimalWall.optimalWall2(p2, board);
+			
+			/*Transformation des list int a des list string*/
+			ArrayList<String> newOptWalls = new ArrayList<>(optWalls.size());
+			for (Integer myInt : optWalls) { 
+				newOptWalls.add(String.valueOf(myInt)); 
+			}
+			
+			
+			/*La combinaison des possible moves avec optimalWall*/
+			ArrayList<String> combination = new ArrayList<String>(pMoves);
+			combination.addAll(newOptWalls);
+			
 			//Boucles pour tous les moves possibles
 			for (int i = 0; i < p2.possibleMoves().size(); i++) {
 				
-				move = p2.possibleMoves().get(i);
-				p2.Move(move);
-				retHolder = miniMax(board, true, depth-1, alpha, beta, p1, p2);
+				//Pawn move
+				if (i < pMoves.size()) {
+					move = combination.get(i);
+					p2.Move(move);
+				}
+				//Wall placement
+				else {
+					move = combination.get(i) + "," + combination.get(i+1);
+					int xWall = Integer.parseInt(combination.get(i));
+					int yWall = Integer.parseInt(combination.get(i+1));
+					board.setWall(xWall, yWall, p2);
+				}
+				
+				
+				retHolder = miniMax(board, false, depth-1, alpha, beta, p1, p2);
 				currentEval = Float.parseFloat(retHolder[0]);
-				p2.Move(p2.oppositeMove(move));//Annule le deplacement effectuer precedemment
+			
+				//Pawn move
+				if (i < pMoves.size()) {
+					move = combination.get(i);
+					p2.Move(p1.oppositeMove(move));//Annule le deplacement effectuer precedemment
+				}
+				
+				//Wall placement
+				else {
+					int xWall = Integer.parseInt(combination.get(i));
+					int yWall = Integer.parseInt(combination.get(i+1));
+					board.undoWall(xWall, yWall, p2);//Annule le mur placer precedemment
+					i++;
+				}
 				
 				if (currentEval < minEval) {
 					minEval = currentEval;
