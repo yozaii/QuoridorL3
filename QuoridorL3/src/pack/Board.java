@@ -31,15 +31,15 @@ public class Board {
 	public boolean setWall(int x, int y, Pawn player, Pawn player2) {
 		
 		if(!(board[x][y].GetIsWallTile()) || board[x][y].GetHasWall() || (x%2==1 && y%2==1)  || x==16 || y==0) {
-			System.out.print("Cet emplacement ne peut pas contenir de mur (" + x + "," + y + ")\n");
+			//System.out.print("Cet emplacement ne peut pas contenir de mur (" + x + "," + y + ")\n");
 			return false;
 		} 
 		else if(containsWall(x,y)) {
-			System.out.print("Cet emplacement contient déjà un mur(" + x + "," + y + ")\n");
+			//System.out.print("Cet emplacement contient déjà un mur(" + x + "," + y + ")\n");
 			return false;
 		}
 		else if(player.getNumWalls()==0) {
-			System.out.print("Vous avez plus de murs � emplacer\n");
+			//System.out.print("Vous avez plus de murs � emplacer\n");
 			return false;
 		}
 		else {
@@ -48,13 +48,14 @@ public class Board {
 			LinkedList<Integer> l = AStar.AlgoAStar(player, this);
 			LinkedList<Integer> l2 = AStar.AlgoAStar(player2, this);
 
-			if (l2.size() ==0 || l.size() == 0 ) {
+			if (l2.size() == 0 || l.size() == 0 ) {
 				System.out.print("Vous ne pouvez pas completement bloquer les pions");
 				this.undoWall(x, y, player);
 				return false;
 			}
-			
-			System.out.print("Le mur a été placé x: " + x + "y: " + y);
+
+			//System.out.print("Le mur a été placé x: " + x + "y: " + y);
+			//System.out.println(player.getColor() + " , " +  player.getY() + " , " + player.getX() + " : " + l + " ; " + player2.getColor() + " , " +  player2.getY() + " , " + player2.getX() + " : " + l2);
 			player.decreaseNumWalls();
 			return true;
 		}
@@ -63,7 +64,7 @@ public class Board {
 	public void undoWall(int x, int y, Pawn player) {
 		if(y%2==1) for(int i=0;i<3;i++) board[x+i][y].SetHasWall(false);
 		if(x%2==1) for(int i=0;i<3;i++) board[x][y-i].SetHasWall(false);
-		System.out.print("Le mur a été enleve\n");
+		//System.out.print("Le mur a été enleve\n");
 		player.increaseNumWalls();
 	}
 	

@@ -21,6 +21,9 @@ public class AStar {
             cout.put(i,1000);
         }
         cout.replace(a,0);
+        for(int i=0;i<(17*17);i++) {
+            from.put(i,a);
+        }
         int u = 0;
         while((a/17 != player.getYWin() || isFinished==false) && u!=1000) {
             int minv = 2000;
@@ -45,7 +48,7 @@ public class AStar {
                     if((!(c.contains(v))) && w>(k+2)) {
                         cout.replace(v,cout.get(u)+2);
                         q.add(v);
-                        from.put(v,u);
+                        from.replace(v,u);
                         //System.out.println(u + "&" + cout.get(u) + "-" + v + "&" + cout.get(v) + "-" + from.get(v));
                     }
                 }
