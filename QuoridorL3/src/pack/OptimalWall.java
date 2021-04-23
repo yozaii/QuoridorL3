@@ -19,33 +19,47 @@ public class OptimalWall {
  * y-1 x
  */
 
-    static public int optimalWall1(Pawn playerActive,Pawn player2, Board board){
+    static public ArrayList<Integer> optimalWall1(Pawn playerActive,Pawn player2, Board board){
     	
     	
         int x = player2.getX();
         int y = player2.getY();
 
-        int xWall = -1;
-        int YWall = -1;
+        ArrayList<Integer> bestWallList = new ArrayList<Integer>();
+        bestWallList.add(0); //Size Wall 1
+        bestWallList.add(0); //X Wall 1
+        bestWallList.add(0); //Y Wall 1
+        bestWallList.add(0); //Size Wall 2
+        bestWallList.add(0); //X Wall 2
+        bestWallList.add(0); //Y Wall 2
+        bestWallList.add(0); //Size Wall 3
+        bestWallList.add(0); //X Wall 3
+        bestWallList.add(0); //Y Wall 3
+        bestWallList.add(0); //Size Min
+        bestWallList.add(0); //Index Min
+        bestWallList = setMinimumSize(bestWallList);
 
-        int bestWall = 0;
 
         if(y != 0) {
             if(x != 0) {
                 if(board.setWall(x-2,y-1,playerActive, player2)) {
-                    if(AStar.AlgoAStar(player2, board).size() > bestWall) {
-                        bestWall = AStar.AlgoAStar(player2, board).size();
-                        xWall = x-2;
-                        YWall = y-1;
+                    int size = AStar.AlgoAStar(player2, board).size();
+                    if(size > bestWallList.get(9)) {
+                        bestWallList.set(9, size);
+                        bestWallList.set(bestWallList.get(10)+1, x-2);
+                        bestWallList.set(bestWallList.get(10)+2, y-1);
+                        bestWallList = setMinimumSize(bestWallList);
                     }
                     board.undoWall(x-2, y-1, playerActive);
                 }
             }
             if(board.setWall(x,y-1,playerActive, player2)) {
-                if(AStar.AlgoAStar(player2, board).size() > bestWall) {
-                    bestWall = AStar.AlgoAStar(player2, board).size();
-                    xWall = x;
-                    YWall = y-1;
+                int size = AStar.AlgoAStar(player2, board).size();
+                if(size > bestWallList.get(9)) {
+                    bestWallList.set(9, size);
+                    bestWallList.set(bestWallList.get(10)+1, x);
+                    bestWallList.set(bestWallList.get(10)+2, y-1);
+                    bestWallList = setMinimumSize(bestWallList);
                 }
                 board.undoWall(x, y-1, playerActive);
             }
@@ -53,96 +67,81 @@ public class OptimalWall {
         if(y != 16) {
             if(x != 0) {
                 if(board.setWall(x-1,y+2,playerActive, player2)) {
-                    if(AStar.AlgoAStar(player2, board).size() > bestWall) {
-                        bestWall = AStar.AlgoAStar(player2, board).size();
-                        xWall = x-1;
-                        YWall = y+2;
+                    int size = AStar.AlgoAStar(player2, board).size();
+                    if(size > bestWallList.get(9)) {
+                        bestWallList.set(9, size);
+                        bestWallList.set(bestWallList.get(10)+1, x-1);
+                        bestWallList.set(bestWallList.get(10)+2, y+2);
+                        bestWallList = setMinimumSize(bestWallList);
                     }
                     board.undoWall(x-1, y+2, playerActive);
                 }
                 if(board.setWall(x-2,y+1,playerActive, player2)) {
-                    if(AStar.AlgoAStar(player2, board).size() > bestWall) {
-                        bestWall = AStar.AlgoAStar(player2, board).size();
-                        xWall = x-2;
-                        YWall = y+1;
+                    int size = AStar.AlgoAStar(player2, board).size();
+                    if(size > bestWallList.get(9)) {
+                        bestWallList.set(9, size);
+                        bestWallList.set(bestWallList.get(10)+1, x-2);
+                        bestWallList.set(bestWallList.get(10)+2, y+1);
+                        bestWallList = setMinimumSize(bestWallList);
                     }
                     board.undoWall(x-2, y+1, playerActive);
                 }
             }
             if(x != 16) {
                 if(board.setWall(x+1,y+2,playerActive, player2)) {
-                    if(AStar.AlgoAStar(player2, board).size() > bestWall) {
-                        bestWall = AStar.AlgoAStar(player2, board).size();
-                        xWall = x+1;
-                        YWall = y+2;
+                    int size = AStar.AlgoAStar(player2, board).size();
+                    if(size > bestWallList.get(9)) {
+                        bestWallList.set(9, size);
+                        bestWallList.set(bestWallList.get(10)+1, x+1);
+                        bestWallList.set(bestWallList.get(10)+2, y+2);
+                        bestWallList = setMinimumSize(bestWallList);
                     }
                     board.undoWall(x+1, y+2, playerActive);
                 }
             }
             if(board.setWall(x,y+1,playerActive, player2)) {
-                if(AStar.AlgoAStar(player2, board).size() > bestWall) {
-                    bestWall = AStar.AlgoAStar(player2, board).size();
-                    xWall = x;
-                    YWall = y+1;
+                int size = AStar.AlgoAStar(player2, board).size();
+                if(size > bestWallList.get(9)) {
+                    bestWallList.set(9, size);
+                    bestWallList.set(bestWallList.get(10)+1, x);
+                    bestWallList.set(bestWallList.get(10)+2, y+1);
+                    bestWallList = setMinimumSize(bestWallList);
                 }
                 board.undoWall(x, y+1, playerActive);
             }
         }
         if(x != 0) {
             if(board.setWall(x-1,y,playerActive, player2)) {
-                if(AStar.AlgoAStar(player2, board).size() > bestWall) {
-                    bestWall = AStar.AlgoAStar(player2, board).size();
-                    xWall = x-1;
-                    YWall = y;
+                int size = AStar.AlgoAStar(player2, board).size();
+                if(size > bestWallList.get(9)) {
+                    bestWallList.set(9, size);
+                    bestWallList.set(bestWallList.get(10)+1, x-1);
+                    bestWallList.set(bestWallList.get(10)+2, y);
+                    bestWallList = setMinimumSize(bestWallList);
                 }
                 board.undoWall(x-1, y, playerActive);
             }
         }
         if(x != 16) {
             if(board.setWall(x+1,y,playerActive, player2)) {
-                if(AStar.AlgoAStar(player2, board).size() > bestWall) {
-                    bestWall = AStar.AlgoAStar(player2, board).size();
-                    xWall = x+1;
-                    YWall = y;
+                int size = AStar.AlgoAStar(player2, board).size();
+                if(size > bestWallList.get(9)) {
+                    bestWallList.set(9,size);
+                    bestWallList.set(bestWallList.get(10)+1, x+1);
+                    bestWallList.set(bestWallList.get(10)+2, y);
+                    bestWallList = setMinimumSize(bestWallList);
                 }
                 board.undoWall(x+1, y, playerActive);
             }
         }
-        
-        optimalX = xWall;
-        optimalY = YWall;
-        System.out.println("1: x=" + xWall + " ; y=" + YWall);
 
-        return bestWall;
+        return bestWallList;
     }
 
     static public ArrayList<Integer> optimalWall2(Pawn playerActive, Pawn player2, Board board) {
 
-        //Initialisating the coordinates of the best walls 
-        int xWall1 = -1;int YWall1 = -1;
-        int xWall2 = -1;int YWall2 = -1;
-        int xWall3 = -1;int YWall3 = -1;
-
-        //We are testing 3 walls to increase the chance to find the best wall through time
-        int bestWall1 = 0;
-        int bestWall2 = 0;
-        int bestWall3 = 0;
         //We test walls for the tile where the pawn is
-        if(bestWall1 < optimalWall1(playerActive, player2, board)) {
-            bestWall1 = optimalWall1(playerActive, player2, board);
-            xWall1 = optimalX;
-            YWall1 = optimalY;
-        }
-        else if(bestWall2 < optimalWall1(playerActive, player2, board)) {
-            bestWall2 = optimalWall1(playerActive, player2, board);
-            xWall2 = optimalX;
-            YWall2 = optimalY;
-        }
-        else if(bestWall3 < optimalWall1(playerActive, player2, board)) {
-            bestWall3 = optimalWall1(playerActive, player2, board);
-            xWall3 = optimalX;
-            YWall3 = optimalY;
-        }
+        ArrayList<Integer> bestWallList = optimalWall1(playerActive, player2, board);
 
         //We test the walls for all the tile in the best way to win
         for(int i : AStar.AlgoAStar(player2, board)) {
@@ -150,24 +149,8 @@ public class OptimalWall {
             int y = i/17;
 
             Pawn tempPlayer = new Pawn(board,x,y);
-            if(bestWall1 < optimalWall1(playerActive, player2, board)) {
-                bestWall1 = optimalWall1(playerActive, player2, board);
-                xWall1 = optimalX;
-                YWall1 = optimalY;
-                System.out.println("TestT");
-            }
-            else if(bestWall2 < optimalWall1(playerActive, player2, board)) {
-                bestWall2 = optimalWall1(playerActive, player2, board);
-                xWall2 = optimalX;
-                YWall2 = optimalY;
-                System.out.println("\tTestT");
-            }
-            else if(bestWall3 < optimalWall1(playerActive, player2, board)) {
-                bestWall3 = optimalWall1(playerActive, player2, board);
-                xWall3 = optimalX;
-                YWall3 = optimalY;
-                System.out.println("\t\tTestT");
-            }
+            ArrayList<Integer> bestWallTemp = optimalWall1(playerActive, tempPlayer, board);
+            bestWallList = Concat2Array(bestWallTemp, bestWallList);
         }
 
         //System.out.println("2 : x=" + xWall1 + " ; y=" + YWall1);
@@ -175,11 +158,47 @@ public class OptimalWall {
         //System.out.println("2 : x=" + xWall3 + " ; y=" + YWall3);
         
         ArrayList<Integer> bestWall = new ArrayList<Integer>();
-        bestWall.add(xWall1);bestWall.add(YWall1);
-        bestWall.add(xWall2);bestWall.add(YWall2);
-        bestWall.add(xWall3);bestWall.add(YWall3);
+        for(int i=0; i<3;i+=3) {
+            bestWall.add(bestWallList.get(i*3+1));
+            bestWall.add(bestWallList.get(i*3+2));
+        }
         return bestWall;
 
+    }
+
+    public static ArrayList<Integer> setMinimumSize(ArrayList<Integer> list) {
+        int minimumSize = 0;
+        int indexSize = 0;
+        for(int i=0;i<3;i++) {
+            if(list.get(i*3) < minimumSize) {
+                minimumSize = list.get(i*3);
+                indexSize = i*3;
+            }
+        }
+        list.set(9, minimumSize);
+        list.set(10,indexSize);
+        return list;
+    }
+
+    public static ArrayList<Integer> Concat2Array(ArrayList<Integer> list, ArrayList<Integer> bestWallList) {
+        int maximumSize = 0;
+        int indexSize = 0;
+        for(int i=0;i<3;i++) {
+            if(list.get(i*3) > maximumSize) {
+                maximumSize = list.get(i*3);
+                indexSize = i*3;
+            }
+        }
+        for(int i=0;i<3;i++) {
+            if(maximumSize > bestWallList.get(9)) {
+                list.set(indexSize, 0);
+                bestWallList.set(bestWallList.get(10), maximumSize);
+                bestWallList.set(bestWallList.get(10)+1, list.get(maximumSize+1));
+                bestWallList.set(bestWallList.get(10)+2, list.get(maximumSize+2));
+                bestWallList = setMinimumSize(bestWallList);
+            }
+        }
+        return bestWallList;
     }
     
 }

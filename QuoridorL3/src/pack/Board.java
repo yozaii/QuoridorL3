@@ -49,7 +49,7 @@ public class Board {
 			LinkedList<Integer> l2 = AStar.AlgoAStar(player2, this);
 
 			if (l2.size() == 0 || l.size() == 0 ) {
-				System.out.print("Vous ne pouvez pas completement bloquer les pions");
+				System.out.println("Vous ne pouvez pas completement bloquer les pions : "+ x + " , " + y);
 				this.undoWall(x, y, player);
 				return false;
 			}
