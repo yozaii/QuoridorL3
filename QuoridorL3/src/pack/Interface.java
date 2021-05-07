@@ -38,10 +38,8 @@ public class Interface {
 		Pawn p2 = new Pawn(board, "Black");
 		System.out.print("---BIENVENUE AU JEU DU QUORIDOR---\n");
 		while(result != 2) {
-			System.out.println("3indish " + p1.getNumWalls() + " gidar ");
 			menuBase(p1,board, p2);
 			if(result != 2) {
-				System.out.println("3indish " + p2.getNumWalls() + "gidar ");
 				menuBase(p2,board, p1);
 			}
 		}
