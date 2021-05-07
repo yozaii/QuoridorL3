@@ -15,11 +15,22 @@ public class AI {
 	 * + pour p1
 	 * - pour p2
 	 */
+
+	/*Total eval = pathEval + wallEval*/
 	public static float eval (Board board, Pawn p1, Pawn p2) {
 		
 		
 		float eval = 0;
-			
+		eval = pathEval(board, p1, p2) + wallEval(board, p1, p2);
+		return eval;
+		
+	}
+	
+	/*Eval according to distance to victory*/
+	public static float pathEval(Board board, Pawn p1, Pawn p2) {
+		
+		float eval = 0;
+		
 		float eval1 = AStar.AlgoAStar(p1, board).size();//La longueur du AStar en cases
 		if (eval1 == 0) eval1 = Float.MAX_VALUE;//On peut pas diviser par 0, on met 1000
 		else {
@@ -36,11 +47,11 @@ public class AI {
 			eval2 = 1/eval2;
 		}
 		
-		eval = (eval1 - eval2)*10 + wallEval(board, p1, p2);
-		
+		eval = (eval1 - eval2)*10;
 		return eval;
 	}
 	
+	/*Eval according to number of walls*/
 	public static float wallEval(Board board, Pawn p1, Pawn p2) {
 		
 		float nWalls1 = p1.getNumWalls();
@@ -58,6 +69,7 @@ public class AI {
 		
 		return eval;
 	}
+	
 	
 	/*Algorithme Minimax
 	 * retourne une tableau de chaine avec 2 valeurs: [eval, bestMove]
@@ -84,21 +96,9 @@ public class AI {
 			
 			maxEval = Integer.MIN_VALUE;
 			
-			
 			ArrayList<String> pMoves = p1.possibleMoves();
-			ArrayList<Integer> optWalls = OptimalWall.optimalWall2(p1, p2, board);
-			
-			/*Transformation des list int a des list string*/
-			ArrayList<String> newOptWalls = new ArrayList<>(optWalls.size());
-			for (Integer myInt : optWalls) { 
-				newOptWalls.add(String.valueOf(myInt)); 
-			}
-			
-			
-			/*La combinaison des possible moves avec optimalWall*/
-			ArrayList<String> combination = new ArrayList<String>(pMoves);
-			combination.addAll(newOptWalls);
-			
+			ArrayList<Integer> optWalls =  OptimalWall.optimalWall2(p1, p2, board);
+			ArrayList<String> combination = UtilList.intStringComb(pMoves, optWalls);
 			
 			//Boucles pour tous les moves possibles
 			for (int i = 0; i < combination.size(); i++) {
@@ -155,16 +155,7 @@ public class AI {
 			ArrayList<String> pMoves = p2.possibleMoves();
 			ArrayList<Integer> optWalls = OptimalWall.optimalWall2(p2, p1, board);
 			
-			/*Transformation des list int a des list string*/
-			ArrayList<String> newOptWalls = new ArrayList<>(optWalls.size());
-			for (Integer myInt : optWalls) { 
-				newOptWalls.add(String.valueOf(myInt)); 
-			}
-			
-			
-			/*La combinaison des possible moves avec optimalWall*/
-			ArrayList<String> combination = new ArrayList<String>(pMoves);
-			combination.addAll(newOptWalls);
+			ArrayList<String> combination = UtilList.intStringComb(pMoves, optWalls);
 			
 			//Boucles pour tous les moves possibles
 			for (int i = 0; i < p2.possibleMoves().size(); i++) {
@@ -215,6 +206,8 @@ public class AI {
 			
 		}
 	}
+	
+	
 	
 	/*Algorithme Minimax
 	 * retourne une tableau de chaine avec 2 valeurs: [eval, bestMove]
