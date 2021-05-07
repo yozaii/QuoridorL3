@@ -304,7 +304,7 @@ public class Pawn {
 	//Retire 1 de numWalls
 	public void decreaseNumWalls() {
 		this.numWalls--;
-		System.out.println("Walls:" + this.numWalls);
+		//System.out.println("Walls:" + this.numWalls);
 	}
 	
 	public void increaseNumWalls() {
@@ -312,7 +312,7 @@ public class Pawn {
 	}
 	
 	public void PrintPosition() {
-		System.out.println("x: " + x + " y: " + y);
+		//System.out.println("x: " + x + " y: " + y);
 	}
 	
 	public boolean isThatYou(int x,int y) {

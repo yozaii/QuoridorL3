@@ -38,8 +38,10 @@ public class Interface {
 		Pawn p2 = new Pawn(board, "Black");
 		System.out.print("---BIENVENUE AU JEU DU QUORIDOR---\n");
 		while(result != 2) {
+			System.out.println("3indish " + p1.getNumWalls() + " gidar ");
 			menuBase(p1,board, p2);
 			if(result != 2) {
+				System.out.println("3indish " + p2.getNumWalls() + "gidar ");
 				menuBase(p2,board, p1);
 			}
 		}
@@ -65,7 +67,7 @@ public class Interface {
 				int commaIndex = s[1].indexOf(',');
 				int xWall = Integer.parseInt(s[1].substring(0, commaIndex));
 				int yWall = Integer.parseInt(s[1].substring(commaIndex+1, s[1].length()));
-				board.setWall(xWall, yWall, p2, p2);
+				board.setWall(xWall, yWall, p1, p2);
 			}
 			
 			//If move is pawn move

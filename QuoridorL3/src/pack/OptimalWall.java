@@ -32,7 +32,7 @@ public class OptimalWall {
 
         if(y != 0) {
             if(x != 0) {
-                if(board.setWall(x-2,y-1,playerActive, player2)) {
+                if(board.setWall(x-2,y-1,playerActive,player2)) {
                     if(AStar.AlgoAStar(player2, board).size() > bestWall) {
                         bestWall = AStar.AlgoAStar(player2, board).size();
                         xWall = x-2;
@@ -41,7 +41,7 @@ public class OptimalWall {
                     board.undoWall(x-2, y-1, playerActive);
                 }
             }
-            if(board.setWall(x,y-1,playerActive, player2)) {
+            if(board.setWall(x,y-1,playerActive,player2)) {
                 if(AStar.AlgoAStar(player2, board).size() > bestWall) {
                     bestWall = AStar.AlgoAStar(player2, board).size();
                     xWall = x;
@@ -52,7 +52,7 @@ public class OptimalWall {
         }
         if(y != 16) {
             if(x != 0) {
-                if(board.setWall(x-1,y+2,playerActive, player2)) {
+                if(board.setWall(x-1,y+2,playerActive,player2)) {
                     if(AStar.AlgoAStar(player2, board).size() > bestWall) {
                         bestWall = AStar.AlgoAStar(player2, board).size();
                         xWall = x-1;
@@ -60,7 +60,7 @@ public class OptimalWall {
                     }
                     board.undoWall(x-1, y+2, playerActive);
                 }
-                if(board.setWall(x-2,y+1,playerActive, player2)) {
+                if(board.setWall(x-2,y+1,playerActive,player2)) {
                     if(AStar.AlgoAStar(player2, board).size() > bestWall) {
                         bestWall = AStar.AlgoAStar(player2, board).size();
                         xWall = x-2;
@@ -70,7 +70,7 @@ public class OptimalWall {
                 }
             }
             if(x != 16) {
-                if(board.setWall(x+1,y+2,playerActive, player2)) {
+                if(board.setWall(x+1,y+2,playerActive,player2)) {
                     if(AStar.AlgoAStar(player2, board).size() > bestWall) {
                         bestWall = AStar.AlgoAStar(player2, board).size();
                         xWall = x+1;
@@ -79,7 +79,7 @@ public class OptimalWall {
                     board.undoWall(x+1, y+2, playerActive);
                 }
             }
-            if(board.setWall(x,y+1,playerActive, player2)) {
+            if(board.setWall(x,y+1,playerActive,player2)) {
                 if(AStar.AlgoAStar(player2, board).size() > bestWall) {
                     bestWall = AStar.AlgoAStar(player2, board).size();
                     xWall = x;
@@ -89,7 +89,7 @@ public class OptimalWall {
             }
         }
         if(x != 0) {
-            if(board.setWall(x-1,y,playerActive, player2)) {
+            if(board.setWall(x-1,y,playerActive,player2)) {
                 if(AStar.AlgoAStar(player2, board).size() > bestWall) {
                     bestWall = AStar.AlgoAStar(player2, board).size();
                     xWall = x-1;
@@ -99,7 +99,7 @@ public class OptimalWall {
             }
         }
         if(x != 16) {
-            if(board.setWall(x+1,y,playerActive, player2)) {
+            if(board.setWall(x+1,y,playerActive,player2)) {
                 if(AStar.AlgoAStar(player2, board).size() > bestWall) {
                     bestWall = AStar.AlgoAStar(player2, board).size();
                     xWall = x+1;
@@ -111,7 +111,7 @@ public class OptimalWall {
         
         optimalX = xWall;
         optimalY = YWall;
-        System.out.println("1: x=" + xWall + " ; y=" + YWall);
+        //System.out.println("1: x=" + xWall + " ; y=" + YWall);
 
         return bestWall;
     }
@@ -154,19 +154,19 @@ public class OptimalWall {
                 bestWall1 = optimalWall1(playerActive, player2, board);
                 xWall1 = optimalX;
                 YWall1 = optimalY;
-                System.out.println("TestT");
+                //System.out.println("TestT");
             }
             else if(bestWall2 < optimalWall1(playerActive, player2, board)) {
                 bestWall2 = optimalWall1(playerActive, player2, board);
                 xWall2 = optimalX;
                 YWall2 = optimalY;
-                System.out.println("\tTestT");
+                //System.out.println("\tTestT");
             }
             else if(bestWall3 < optimalWall1(playerActive, player2, board)) {
                 bestWall3 = optimalWall1(playerActive, player2, board);
                 xWall3 = optimalX;
                 YWall3 = optimalY;
-                System.out.println("\t\tTestT");
+                //System.out.println("\t\tTestT");
             }
         }
 
