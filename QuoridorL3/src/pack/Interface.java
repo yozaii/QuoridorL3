@@ -57,6 +57,7 @@ public class Interface {
 		Pawn p2 = new Pawn(board, "Black");
 		System.out.print("---BIENVENUE AU JEU DU QUORIDOR---\n");
 		while(result != 2) {
+			System.out.print("C'est au tour de l'IA...\n");
 			String[] s = AI.miniMax(board, true, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, p1, p2);
 			System.out.println ("Utility: " + s[0] + "\nMove: " + s[1]);
 			//If move is wall move
@@ -71,13 +72,20 @@ public class Interface {
 			else {
 				result = p1.Move(s[1]);
 			}
-			if(result != 2) {
+			if(result == 2) {
+				System.out.print("************************************************************\n");
+				System.out.print("|     LA PARTIE EST FINIE, VOUS AVEZ PERDU !! =(           |\n");
+				System.out.print("************************************************************\n\n\n");
+			}
+			else {
 				menuBase(p2,board, p1);
+				if(result == 2) {
+					System.out.print("************************************************************\n");
+					System.out.print("|     BRAVO LA PARTIE EST FINIE, VOUS AVEZ GAGNE !! ^^     |\n");
+					System.out.print("************************************************************\n\n\n");
+				}
 			}
 		}
-		System.out.print("************************************************************\n");
-		System.out.print("|     BRAVO LA PARTIE EST FINIE, VOUS AVEZ GAGNE !! ^^     |\n");
-		System.out.print("************************************************************\n\n\n");
 		printGrid(board);
 		sc.close();
 	}
@@ -92,6 +100,7 @@ public class Interface {
 		while(result != 2) {
 			menuBase(p1,board, p2);
 			if(result != 2) {
+				System.out.print("C'est au tour de l'IA...\n");
 				String[] s = AI.miniMax(board, false, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, p1, p2);
 				
 				//If move is wall move
@@ -105,13 +114,20 @@ public class Interface {
 				//If move is pawn move
 				else {
 					result = p2.Move(s[1]);
+					if(result == 2) {
+						System.out.print("************************************************************\n");
+						System.out.print("|     LA PARTIE EST FINIE, VOUS AVEZ PERDU !! =(           |\n");
+						System.out.print("************************************************************\n\n\n");
+					}
 				}
 
 			}
+			else {
+				System.out.print("************************************************************\n");
+				System.out.print("|     BRAVO LA PARTIE EST FINIE, VOUS AVEZ GAGNE !! ^^     |\n");
+				System.out.print("************************************************************\n\n\n");
+			}
 		}
-		System.out.print("************************************************************\n");
-		System.out.print("|     BRAVO LA PARTIE EST FINIE, VOUS AVEZ GAGNE !! ^^     |\n");
-		System.out.print("************************************************************\n\n\n");
 		printGrid(board);
 		sc.close();
 	}
