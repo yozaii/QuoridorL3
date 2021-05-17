@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Interface {
 	
-	private static int result;
+	private static int result = 1;
 	
 	/**
 	 * Method which print the grid with walls and pawn
@@ -36,9 +36,9 @@ public class Interface {
 		Pawn p1 = new Pawn(board, "White");
 		Pawn p2 = new Pawn(board, "Black");
 		System.out.print("---BIENVENUE AU JEU DU QUORIDOR---\n");
-		while(result != 2) {
+		while(result < 2) {
 			menuBase(p1,board, p2);
-			if(result != 2) {
+			if(result < 2) {
 				menuBase(p2,board, p1);
 			}
 		}
@@ -56,7 +56,7 @@ public class Interface {
 		Pawn p1 = new Pawn(board, "White");
 		Pawn p2 = new Pawn(board, "Black");
 		System.out.print("---BIENVENUE AU JEU DU QUORIDOR---\n");
-		while(result != 2) {
+		while(result < 2) {
 			System.out.print("C'est au tour de l'IA...\n");
 			String[] s = AI.miniMax(board, true, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, p1, p2);
 			System.out.println ("Utility: " + s[0] + "\nMove: " + s[1]);
@@ -97,9 +97,9 @@ public class Interface {
 		Pawn p1 = new Pawn(board, "White");
 		Pawn p2 = new Pawn(board, "Black");
 		System.out.print("---BIENVENUE AU JEU DU QUORIDOR---\n");
-		while(result != 2) {
+		while(result < 2) {
 			menuBase(p1,board, p2);
-			if(result != 2) {
+			if(result < 2) {
 				System.out.print("C'est au tour de l'IA...\n");
 				String[] s = AI.miniMax(board, false, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, p1, p2);
 				
@@ -159,7 +159,12 @@ public class Interface {
 					menuBase(player, board, player2);
 				}
 				break;
-		case 3 : System.out.print("Au Revoir"); break;
+		case 3 : {
+			System.out.print("************************************************************\n");
+			System.out.print("|     LA PARTIE EST FINIE, VOUS AVEZ ABANDONNÉ !! =(       |\n");
+			System.out.print("************************************************************\n\n\n");
+			result = 3;
+		} break;
 		case 4 : player.Move("Down"); break;
 		default : System.out.print("J'ai pas compris\n");
 		}
