@@ -165,7 +165,10 @@ public class Interface {
 			System.out.print("************************************************************\n\n\n");
 			result = 3;
 		} break;
-		case 4 : player.Move("Down"); break;
+		case 4 : {
+			UtilTxt.rules();
+			menuBase(player, board, player2);
+		} break;
 		default : System.out.print("J'ai pas compris\n");
 		}
 	}
