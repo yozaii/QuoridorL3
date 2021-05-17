@@ -30,6 +30,7 @@ public class Board {
 	/*Place un mur d'une longueur de 3*/
 	public boolean setWall(int x, int y, Pawn player, Pawn player2) {
 		
+		if(x<0 || x>16 || y<0 || y>16) return false;
 		if(!(board[x][y].GetIsWallTile()) || board[x][y].GetHasWall() || (x%2==1 && y%2==1)  || x==16 || y==0) {
 			//System.out.print("Cet emplacement ne peut pas contenir de mur (" + x + "," + y + ")\n");
 			return false;

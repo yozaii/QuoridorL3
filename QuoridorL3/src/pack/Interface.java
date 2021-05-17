@@ -2,7 +2,6 @@ package pack;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Interface {
 	
@@ -59,7 +58,7 @@ public class Interface {
 		System.out.print("---BIENVENUE AU JEU DU QUORIDOR---\n");
 		while(result != 2) {
 			String[] s = AI.miniMax(board, true, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, p1, p2);
-			System.out.println (s[0] + "Move: " + s[1]);
+			System.out.println ("Utility: " + s[0] + "\nMove: " + s[1]);
 			//If move is wall move
 			if (s[1].contains(",")) {
 				int commaIndex = s[1].indexOf(',');
@@ -173,7 +172,7 @@ public class Interface {
 		case 6 : result = player.Move(possibleMoves.get(5)); break;
 		case 7 : result = player.Move(possibleMoves.get(6)); break;
 		case 8 : result = player.Move(possibleMoves.get(7)); break;
-		default : System.out.print("J'ai pas compris\n");
+		default : System.out.print("Je n'ai pas compris\n");
 		}
 	}
 	
