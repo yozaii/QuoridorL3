@@ -14,14 +14,11 @@ public class Tests {
 		Board board = new Board();
 		Pawn p1 = new Pawn(board, "White");
 		Pawn p2 = new Pawn(board, "Black");
-		p1.Move("Down");
-		p1.Move("Down");
-		p1.Move("Down");
 
 		Interface.printGrid(board);
 		
 		int depth = 5;
-		String[] s = AI.miniMax(board, true, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, p1, p2);
+		//String[] s = AI.miniMax(board, true, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, p1, p2);
 		//String[] s = AI.miniMaxNoWall(board, true, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, p1, p2);
 
 		Interface.printGrid(board);
@@ -29,9 +26,8 @@ public class Tests {
 		
 
 		//System.out.println(p1.getNumWalls());
-		System.out.println (s[0] + "Move: " + s[1]);
-		System.out.println(OptimalWall.optimalWall2(p1, p2, board).toString());
-		
+		//System.out.println (s[0] + "Move: " + s[1]);
+		System.out.println("ALgo:" + AStar.AlgoAStar(p1, board).toString());
 		System.out.println(" eval: " + AI.eval(board, p1, p2));
 		
 		

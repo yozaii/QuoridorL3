@@ -113,7 +113,8 @@ public class AI {
 					move = combination.get(i) + "," + combination.get(i+1);
 					int xWall = Integer.parseInt(combination.get(i));
 					int yWall = Integer.parseInt(combination.get(i+1));
-					board.setWall(xWall, yWall, p1, p2);
+					boolean bool = board.setWall(xWall, yWall, p1, p2); //bool added to cut tree if wall placement fails
+					if (bool == false) break;
 				}
 				
 				
@@ -170,7 +171,8 @@ public class AI {
 					move = combination.get(i) + "," + combination.get(i+1);
 					int xWall = Integer.parseInt(combination.get(i));
 					int yWall = Integer.parseInt(combination.get(i+1));
-					board.setWall(xWall, yWall, p2, p1);
+					boolean bool = board.setWall(xWall, yWall, p2, p1);//bool added to cut tree if wall placement fails
+					if (bool == false) break;
 				}
 				
 				

@@ -11,7 +11,7 @@ public class Pawn {
 	private int yWin;
 	private int numWalls;
 	
-	//Constructeur
+	//Constructor 1
 	public Pawn(Board board, String Color) {
 		this.board = board;
 		this.color = Color;
@@ -30,6 +30,7 @@ public class Pawn {
 		this.numWalls = 10;
 	}
 	
+	//Constructor 2
 	public Pawn(Board board,int x,int y) {
 		this.board = board;
 		this.x=x;
@@ -37,55 +38,58 @@ public class Pawn {
 		this.numWalls=10;
 	}
 	
-	//Methode pour renvoyer un set des deplacements possible
+	/**
+	 * Method that returns a list of possible moves
+	 * @return : list of possible moves
+	 */
 	public ArrayList<String> possibleMoves() {
 		ArrayList<String> possibleMoves = new ArrayList<String>();
 		
-		//Reglage pour deplacement "Right"
+		//Settings for "Right"
 		if (x<=14 && board.GetTile(x+1, y).GetHasWall() == false) {
 			if (board.GetTile(x+2, y).GetHasPawn()=="None") {
 				possibleMoves.add("Right");
 			}
 			else if (board.GetTile(x+2, y).GetHasPawn()!="None" && x<14 &&
-					board.GetTile(x+3, y).GetHasWall() == false && x<=12) {//Pour un saut
+					board.GetTile(x+3, y).GetHasWall() == false && x<=12) {//For a jump
 				possibleMoves.add("Right");
 			}
 		}
 		
-		//Reglage pour deplacement "Left"
+		//Settings for "Left"
 		if (x>=2 && board.GetTile(x-1, y).GetHasWall() == false) {
 			if (board.GetTile(x-2, y).GetHasPawn()=="None") {
 				possibleMoves.add("Left");
 			}
 			else if (board.GetTile(x-2, y).GetHasPawn()!="None" && x>2 && 
-					board.GetTile(x-3, y).GetHasWall() == false && x>=4) {//Pour un saut
+					board.GetTile(x-3, y).GetHasWall() == false && x>=4) {//For a jump
 				possibleMoves.add("Left");
 			}
 		}
 		
-		//Reglage pour deplacement "Up"
+		//Settings for "Up"
 		if (y<=14 && board.GetTile(x, y+1).GetHasWall() == false) {
 			if (board.GetTile(x, y+2).GetHasPawn()=="None") {
 				possibleMoves.add("Up");
 			}
 			else if (board.GetTile(x, y+2).GetHasPawn()!="None" && y<14 &&
-					board.GetTile(x, y+3).GetHasWall() == false && y<=12) {//Pour un saut
+					board.GetTile(x, y+3).GetHasWall() == false && y<=12) {//For a jump
 				possibleMoves.add("Up");
 			}
 		}
 		
-		//Reglage pour deplacement "Down"
+		//Settings for "Down"
 		if (y>=2 && board.GetTile(x, y-1).GetHasWall() == false) {
 			if (board.GetTile(x, y-2).GetHasPawn()=="None") {
 				possibleMoves.add("Down");
 			}
 			else if (board.GetTile(x, y-2).GetHasPawn()!="None" && y>2 &&
-					board.GetTile(x, y-3).GetHasWall() == false && y>=4) {//Pour un saut
+					board.GetTile(x, y-3).GetHasWall() == false && y>=4) {//For a jump
 				possibleMoves.add("Down");
 			}
 		}
 		
-		//Reglage pour deplacement si pion oppose et en face vers le haut avec un mur derriere
+		//Settings for movement if an opponent pawn is upwards with a wall behind it
 		if (y<14 && board.GetTile(x, y+2).GetHasPawn() != "None" &&
 				board.GetTile(x, y+3).GetHasWall() == true) {
 			if (x<=14 && board.GetTile(x+1, y+2).GetHasWall() == false) {
@@ -96,7 +100,7 @@ public class Pawn {
 			}
 		}
 		
-		//Reglage pour deplacement si pion oppose et en face vers le bas avec un mur derriere
+		//Settings for movement if an opponent pawn is downwards with a wall behind it
 		if (y>2 && board.GetTile(x, y-2).GetHasPawn() != "None" &&
 				board.GetTile(x, y-3).GetHasWall() == true) {
 			if (x<=14 && board.GetTile(x+1, y-2).GetHasWall() == false) {
@@ -107,7 +111,7 @@ public class Pawn {
 			}
 		}
 		
-		//Reglage pour deplacement si pion oppose et en face vers le gauche avec un mur derriere
+		//Settings for movement if an opponent pawn is towards the left with a wall behind it
 		if (x>2 && board.GetTile(x-2, y).GetHasPawn() != "None" &&
 				board.GetTile(x-3, y).GetHasWall() == true) {
 			if (y<=14 && board.GetTile(x-2, y+1).GetHasWall() == false) {
@@ -118,7 +122,7 @@ public class Pawn {
 			}
 		}
 		
-		//Reglage pour deplacement si pion oppose et en face vers la droite avec un mur derriere
+		//Settings for movement if an opponent pawn is towards the right with a wall behind it
 		if (x<14 && board.GetTile(x+2, y).GetHasPawn() != "None" &&
 				board.GetTile(x+3, y).GetHasWall() == true) {
 			if (y<=14 && board.GetTile(x+2, y+1).GetHasWall() == false) {
@@ -132,6 +136,11 @@ public class Pawn {
 		return possibleMoves;
 	}
 	
+	/**
+	 * Returns the opposite of a given move
+	 * @param move : the move
+	 * @return : returns opposite of move
+	 */
 	public String oppositeMove(String move) {
 		String opp;
 		
@@ -182,7 +191,11 @@ public class Pawn {
 	
 	
 	
-	//Methode de d�placement, retourne 1 en cas de succes , -1 en cas d'echec
+	/**
+	 * The movement method, returns 1 if success, -1 if failure, and 2 if the move wins
+	 * @param Direction : Direction of the movement
+	 * @return : 1 if success, -1 if failure, and 2 if the move wins
+	 */
 	public int Move(String Direction) {
 		
 		int result =-1;	//Le retour pour cette m�thode
@@ -299,7 +312,7 @@ public class Pawn {
 		return result;
 	}
 	
-	//Retire 1 de numWalls
+	//Decreases numWalls by one
 	public void decreaseNumWalls() {
 		this.numWalls--;
 		//System.out.println("Walls:" + this.numWalls);
