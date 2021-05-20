@@ -4,22 +4,28 @@ import java.util.LinkedList;
 
 public class Board {
 
-	private Tile[][] board;	//Le plateau
-	private int dimension = 17;	//Les dimensions de plateau (dimension x dimension)
+	private Tile[][] board;	//The board
+	private int dimension = 17;	//The board dimensions (dimension x dimension)
 	
 	
-	//Constructeur
+	/**
+	 * Constructor
+	 */
 	public Board() {
 		
 		board = new Tile[dimension][dimension];
 		
-		//Cr�ation d'instance pour chaque Tile
+		/*------------------------------------------------------------*/
+		/*-------------Creating an instance of every tile-------------*/
+		/*------------------------------------------------------------*/
 		for (int i=0;i<dimension; i++)
 			for (int j=0;j<dimension; j++)
 				board[i][j] = new Tile();
 		
-		//2 boucles for imbriqu�e pour definir les cases qui peuvent contenir un mur
-		//Nilam : J'ai corrigé quelques trucs pour que les murs soit bien placés
+		/*------------------------------------------------------------*/
+		/*-------------2 nested for loops to define tiles-------------*/
+		/*-------------which can hold walls---------------------------*/
+		/*------------------------------------------------------------*/
 		for (int i=0; i<dimension; i++) {
 			for (int j=0; j<dimension; j++) {
 				if(j%2==1 || i%2==1) board[i][j].SetIsWallTile(true);
@@ -27,22 +33,49 @@ public class Board {
 		}
 	}
 	
-	/*Place un mur d'une longueur de 3*/
+	/**
+	 * Placing a wall with a length of 3 tiles
+	 * @param x : x coordinate of wall
+	 * @param y : y coordinate of wall
+	 * @param player : the player (Pawn) who places the wall
+	 * @param player2 : the opponent player (Pawn)
+	 * @return : boolean determining if wall was placed successfully or not
+	 */
 	public boolean setWall(int x, int y, Pawn player, Pawn player2) {
 		
+		/*------------------------------------------------------------*/
+		/*--------------if wall is placed outside the board-----------*/
+		/*------------------------------------------------------------*/
 		if(x<0 || x>16 || y<0 || y>16) return false;
+		
+		/*------------------------------------------------------------*/
+		/*--------------if x y argument combination is incorrect------*/
+		/*------------------------------------------------------------*/
 		if(!(board[x][y].GetIsWallTile()) || board[x][y].GetHasWall() || (x%2==1 && y%2==1)  || x==16 || y==0) {
 			//System.out.print("Cet emplacement ne peut pas contenir de mur (" + x + "," + y + ")\n");
 			return false;
-		} 
+		}
+		
+		/*------------------------------------------------------------*/
+		/*--------------if there is an already existing wall----------*/
+		/*------------------------------------------------------------*/
 		else if(containsWall(x,y)) {
 			//System.out.print("Cet emplacement contient déjà un mur(" + x + "," + y + ")\n");
 			return false;
 		}
+		
+		
+		/*------------------------------------------------------------*/
+		/*--------------if player has no more walls to place----------*/
+		/*------------------------------------------------------------*/
 		else if(player.getNumWalls()==0) {
 			//System.out.print("Vous avez plus de murs � emplacer\n");
 			return false;
 		}
+		
+		/*------------------------------------------------------------*/
+		/*----if wall completely blocks a player's path to victory----*/
+		/*------------------------------------------------------------*/
 		else {
 			if(y%2==1) for(int i=0;i<3;i++) board[x+i][y].SetHasWall(true);
 			if(x%2==1) for(int i=0;i<3;i++) board[x][y-i].SetHasWall(true);
@@ -62,6 +95,12 @@ public class Board {
 		}
 	}
 	
+	/**
+	 * Undoes a 3 length wall and increments the player's numWalls
+	 * @param x : x coordinate of wall
+	 * @param y : y coordinate of wall
+	 * @param player : player (Pawn) that undoes the walls
+	 */
 	public void undoWall(int x, int y, Pawn player) {
 		if(y%2==1) for(int i=0;i<3;i++) board[x+i][y].SetHasWall(false);
 		if(x%2==1) for(int i=0;i<3;i++) board[x][y-i].SetHasWall(false);
@@ -69,7 +108,10 @@ public class Board {
 		player.increaseNumWalls();
 	}
 	
-	/*Cree une clone du board*/
+	/**
+	 * Clones this Board
+	 * @return : the new Board
+	 */
 	public Board clone() {
 		Board b = new Board();//Board clone
 		for (int i=0; i<b.getDimension(); i++)
@@ -80,6 +122,12 @@ public class Board {
 		return b;
 	}
 	
+	/**
+	 * Returns true if a tile contains a wall
+	 * @param x : x coordinate of tile to test
+	 * @param y : y coordinate of tile to test
+	 * @return : true if contains, false otherwise
+	 */
 	public boolean containsWall(int x,int y) {
 		if(board[x][y].GetHasWall()) return true;
 		for(int i=0;i<3;i++) {
@@ -89,15 +137,23 @@ public class Board {
 		return false;
 	}
 	
+	/**
+	 * Removes a wall from a tile
+	 * @param x : x coordinate of a tile
+	 * @param y : y coordinate of a tile
+	 */
 	public void removeWall(int x,int y){
 		if(y%2==1) for(int i=0;i<3;i++) board[x+i][y].SetHasWall(false);
 			if(x%2==1) for(int i=0;i<3;i++) board[x][y-i].SetHasWall(false);
 	}
 	
+	/*---------------------------------------------------------------------*/
+	/*---------------------GETTERS AND SETTERS-----------------------------*/
+	/*---------------------------------------------------------------------*/
+	
 	public Tile GetTile(int x, int y) {
 		return board[x][y];
 	}
-	
 	
 	public void setTile(int x, int y, Tile t) {
 		this.board[x][y] = t.clone();

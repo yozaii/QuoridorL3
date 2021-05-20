@@ -8,7 +8,7 @@ public class Interface {
 	private static int result = 1;
 	
 	/**
-	 * Method which print the grid with walls and pawn
+	 * Method which prints the grid with walls and pawn
 	 * @param board
 	 */
 	public static void printGrid(Board board) {
@@ -49,7 +49,10 @@ public class Interface {
 		sc.close();
 	}
 	
-	//Menu avec l'IA qui jouent le pion blanc
+	/**
+	 * Method with AI playing as white
+	 * @param depth : depth of miniMax
+	 */
 	public static void menuIA1(int depth) {
 		Scanner sc = new Scanner(System.in);
 		Board board = new Board();
@@ -90,7 +93,10 @@ public class Interface {
 		sc.close();
 	}
 	
-	//Menu avec l'IA qui jouent le pion noir
+	/**
+	 * Method with AI playing as black
+	 * @param depth : depth of miniMax
+	 */
 	public static void menuIA2(int depth) {
 		Scanner sc = new Scanner(System.in);
 		Board board = new Board();
