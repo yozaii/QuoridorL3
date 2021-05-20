@@ -17,7 +17,13 @@ public class AI {
 	 * -  p2
 	 */
 
-	/*Total eval = pathEval + wallEval*/
+	/**
+	 * Total eval by calculation pathEval + wallEval
+	 * @param board : The board that is being used
+	 * @param p1 : Maximizing player (Pawn)
+	 * @param p2 : Minimizing player (Pawn)
+	 * @return : Total eval
+	 */
 	public static float eval (Board board, Pawn p1, Pawn p2) {
 		
 		
