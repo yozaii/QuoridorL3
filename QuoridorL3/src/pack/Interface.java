@@ -105,7 +105,7 @@ public class Interface {
 			if(result < 2) {
 				System.out.print("C'est au tour de l'IA...\n");
 				String[] s = AI.miniMax(board, false, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, p1, p2);
-				
+				System.out.println ("Utility: " + s[0] + "\nMove: " + s[1]);
 				//If move is wall move
 				if (s[1].contains(",")) {
 					int commaIndex = s[1].indexOf(',');

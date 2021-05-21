@@ -2,9 +2,7 @@ package pack;
 
 public class Main {
 
-	public static void main(String args[]) {	
-
-		System.out.print("tes\n");
+	public static void main(String args[]) {
 		
 		GameMenu.gameMenu();
 	}
