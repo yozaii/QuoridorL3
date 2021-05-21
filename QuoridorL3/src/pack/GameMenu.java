@@ -39,9 +39,9 @@ public class GameMenu {
         System.out.print("*************************************\n");
         int choice = UtilEntree.scannerInt(1,3);
         switch(choice) {
-            case 1 : gamePlayer(1); break;
-            case 2 : gamePlayer(3); break;
-            case 3 : gamePlayer(5); break;
+            case 1 : gamePlayer(3); break;
+            case 2 : gamePlayer(5); break;
+            case 3 : gamePlayer(7); break;
             default : System.out.print("Je n'ai pas compris\n");
         }
     }
