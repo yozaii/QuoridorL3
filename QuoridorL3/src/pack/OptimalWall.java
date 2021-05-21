@@ -147,7 +147,7 @@ public class OptimalWall {
         LinkedList <Integer> tempAStar = AStar.AlgoAStar(player2, board);
         
         /*------------------------------------------------------*/
-        /*--------------We iterate max of "branches" times---------*/
+        /*-----------We iterate max of "branches" times---------*/
         /*--------------to avoid wide miniMax branches----------*/
         /*------------------------------------------------------*/
         int iter = tempAStar.size();

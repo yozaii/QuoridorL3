@@ -28,8 +28,10 @@ public class Tests {
 		//System.out.println(p1.getNumWalls());
 		//System.out.println (s[0] + "Move: " + s[1]);
 		System.out.println("ALgo:" + AStar.AlgoAStar(p1, board).toString());
-
-		System.out.println("\nOptimalWall2" + OptimalWall.optimalWall2(p1, p2, board, 3).toString());
+		Pawn tempPlayer = new Pawn(board, 16, 8);
+		System.out.println("\nOptimalWall1 : " + OptimalWall.optimalWall1(p1, tempPlayer, board));
+		//System.out.println("\nOptimalWall2 : " + OptimalWall.optimalWall2(p1, tempPlayer, board, 4).toString());
+		System.out.println("white walls " + p1.getNumWalls() + " black walls " + p2.getNumWalls());
 		System.out.println(" eval: " + AI.eval(board, p1, p2));
 		
 		

@@ -62,7 +62,9 @@ public class Interface {
 		while(result < 2) {
 			System.out.print("C'est au tour de l'IA...\n");
 			String[] s = AI.miniMax(board, true, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, p1, p2);
-			System.out.println ("Utility: " + s[0] + "\nMove: " + s[1]);
+			System.out.println ("\nUtility: " + s[0] + "\nMove: " + s[1]);
+			System.out.println("White walls left: " + p1.getNumWalls());
+			System.out.println("Black walls left: " + p2.getNumWalls());
 			//If move is wall move
 			if (s[1].contains(",")) {
 				int commaIndex = s[1].indexOf(',');
@@ -104,10 +106,13 @@ public class Interface {
 		Pawn p2 = new Pawn(board, "Black");
 		System.out.print("---BIENVENUE AU JEU DU QUORIDOR---\n");
 		while(result < 2) {
+			System.out.println("White walls left: " + p1.getNumWalls());
+			System.out.println("Black walls left: " + p2.getNumWalls());
 			menuBase(p1,board, p2);
 			if(result < 2) {
 				System.out.print("C'est au tour de l'IA...\n");
 				String[] s = AI.miniMax(board, false, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, p1, p2);
+				System.out.println ("\nUtility: " + s[0] + "\nMove: " + s[1]);
 				
 				//If move is wall move
 				if (s[1].contains(",")) {
