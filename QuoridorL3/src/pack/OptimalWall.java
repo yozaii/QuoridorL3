@@ -1,6 +1,7 @@
 package pack;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class OptimalWall {
 
@@ -117,52 +118,41 @@ public class OptimalWall {
     }
 
     static public ArrayList<Integer> optimalWall2(Pawn playerActive, Pawn player2, Board board) {
+    	
+    	
+    	/*------------------------------------------------------*/
+        /*----------Initializing wall coordinates---------------*/
+    	/*------------------------------------------------------*/
+        int xWall = -1;int yWall = -1;
+        ArrayList<Integer> bestWall = new ArrayList<Integer>();
 
-        //Initialisating the coordinates of the best walls 
-        int xWall1 = -1;int YWall1 = -1;
-        int xWall2 = -1;int YWall2 = -1;
-        int xWall3 = -1;int YWall3 = -1;
-
-        //We are testing 3 walls to increase the chance to find the best wall through time
-        int bestWall1 = 0;
-        int bestWall2 = 0;
-        int bestWall3 = 0;
-       
-
-        //We test the walls for all the tile in the best way to win
-        for(int i : AStar.AlgoAStar(player2, board)) {
-            int x = i%17;
-            int y = i/17;
-
+        /*------------------------------------------------------*/
+        /*------------The path opponent pawn will take----------*/
+        /*------------------------------------------------------*/
+        LinkedList <Integer> tempAStar = AStar.AlgoAStar(player2, board);
+        
+        /*------------------------------------------------------*/
+        /*--------------We iterate max of 5 times---------------*/
+        /*--------------to avoid wide miniMax branches----------*/
+        /*------------------------------------------------------*/
+        int iter = tempAStar.size();
+        if (iter > 5) iter = 5;
+        for(int i = 0; i < iter; i++) {
+        	
+            int x = tempAStar.get(i)%17;
+            int y = tempAStar.get(i)/17;
+            
+            //Temp pawn with new x y position according to AStar path
             Pawn tempPlayer = new Pawn(board,x,y);
-            if(bestWall1 < optimalWall1(playerActive, player2, board)) {
-                bestWall1 = optimalWall1(playerActive, player2, board);
-                xWall1 = optimalX;
-                YWall1 = optimalY;
-                //System.out.println("TestT");
-            }
-            else if(bestWall2 < optimalWall1(playerActive, player2, board)) {
-                bestWall2 = optimalWall1(playerActive, player2, board);
-                xWall2 = optimalX;
-                YWall2 = optimalY;
-                //System.out.println("\tTestT");
-            }
-            else if(bestWall3 < optimalWall1(playerActive, player2, board)) {
-                bestWall3 = optimalWall1(playerActive, player2, board);
-                xWall3 = optimalX;
-                YWall3 = optimalY;
-                //System.out.println("\t\tTestT");
+            int tempOptWall1 = optimalWall1(playerActive, tempPlayer, board);
+            xWall = optimalX;
+            yWall = optimalY;
+            if (xWall >= 0 && yWall >= 0) {
+            	bestWall.add(xWall); bestWall.add(yWall);
             }
         }
 
-        //System.out.println("2 : x=" + xWall1 + " ; y=" + YWall1);
-        //System.out.println("2 : x=" + xWall2 + " ; y=" + YWall2);
-        //System.out.println("2 : x=" + xWall3 + " ; y=" + YWall3);
-        
-        ArrayList<Integer> bestWall = new ArrayList<Integer>();
-        bestWall.add(xWall1);bestWall.add(YWall1);
-        bestWall.add(xWall2);bestWall.add(YWall2);
-        bestWall.add(xWall3);bestWall.add(YWall3);
+
         return bestWall;
 
     }
