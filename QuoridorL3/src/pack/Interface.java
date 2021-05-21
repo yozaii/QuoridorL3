@@ -35,7 +35,6 @@ public class Interface {
 		Board board = new Board();
 		Pawn p1 = new Pawn(board, "White");
 		Pawn p2 = new Pawn(board, "Black");
-		System.out.print("---BIENVENUE AU JEU DU QUORIDOR---\n");
 		while(result < 2) {
 			menuBase(p1,board, p2);
 			if(result < 2) {
@@ -58,7 +57,6 @@ public class Interface {
 		Board board = new Board();
 		Pawn p1 = new Pawn(board, "White");
 		Pawn p2 = new Pawn(board, "Black");
-		System.out.print("---BIENVENUE AU JEU DU QUORIDOR---\n");
 		while(result < 2) {
 			System.out.print("C'est au tour de l'IA...\n");
 			String[] s = AI.miniMax(board, true, depth, Integer.MIN_VALUE, Integer.MAX_VALUE, p1, p2);
@@ -102,7 +100,6 @@ public class Interface {
 		Board board = new Board();
 		Pawn p1 = new Pawn(board, "White");
 		Pawn p2 = new Pawn(board, "Black");
-		System.out.print("---BIENVENUE AU JEU DU QUORIDOR---\n");
 		while(result < 2) {
 			menuBase(p1,board, p2);
 			if(result < 2) {
@@ -175,7 +172,7 @@ public class Interface {
 			UtilTxt.rules();
 			menuBase(player, board, player2);
 		} break;
-		default : System.out.print("J'ai pas compris\n");
+		default : System.out.print("Je n'ai pas compris\n");
 		}
 	}
 	
