@@ -28,7 +28,7 @@ public class AI {
 		
 		
 		float eval = 0;
-		eval = pathEval(board, p1, p2) + wallEval(board, p1, p2);
+		eval = pathEval(board, p1, p2); //+ wallEval(board, p1, p2);
 		return eval;
 		
 	}
