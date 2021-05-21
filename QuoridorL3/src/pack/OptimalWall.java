@@ -127,22 +127,7 @@ public class OptimalWall {
         int bestWall1 = 0;
         int bestWall2 = 0;
         int bestWall3 = 0;
-        //We test walls for the tile where the pawn is
-        if(bestWall1 < optimalWall1(playerActive, player2, board)) {
-            bestWall1 = optimalWall1(playerActive, player2, board);
-            xWall1 = optimalX;
-            YWall1 = optimalY;
-        }
-        else if(bestWall2 < optimalWall1(playerActive, player2, board)) {
-            bestWall2 = optimalWall1(playerActive, player2, board);
-            xWall2 = optimalX;
-            YWall2 = optimalY;
-        }
-        else if(bestWall3 < optimalWall1(playerActive, player2, board)) {
-            bestWall3 = optimalWall1(playerActive, player2, board);
-            xWall3 = optimalX;
-            YWall3 = optimalY;
-        }
+       
 
         //We test the walls for all the tile in the best way to win
         for(int i : AStar.AlgoAStar(player2, board)) {
