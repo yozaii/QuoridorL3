@@ -19,7 +19,14 @@ public class OptimalWall {
  * y-1 x-2
  * y-1 x
  */
-
+    
+    /**
+     * Tests all walls around a player, returns what obstructs the most
+     * @param playerActive : Player willing to obstruct
+     * @param player2 : Opponent player
+     * @param board : Board being used
+     * @return : optimal Wall
+     */
     static public int optimalWall1(Pawn playerActive,Pawn player2, Board board){
     	
     	
@@ -116,8 +123,16 @@ public class OptimalWall {
 
         return bestWall;
     }
-
-    static public ArrayList<Integer> optimalWall2(Pawn playerActive, Pawn player2, Board board) {
+    
+    /**
+     * Creates a list of optimalWalls with index i%2 == 0 -> x of wall and i+1 -> y of wall
+     * @param playerActive : Player trying to find walls to obstruct opponent
+     * @param player2 : The opponent
+     * @param board : The board being used
+     * @param branches : Number of optimalWalls we will return (Branches in miniMax)
+     * @return : List of optimalWalls i%2 == 0 -> x of wall and i+1 -> y of Wall
+     */
+    static public ArrayList<Integer> optimalWall2(Pawn playerActive, Pawn player2, Board board, int branches) {
     	
     	
     	/*------------------------------------------------------*/
@@ -132,11 +147,11 @@ public class OptimalWall {
         LinkedList <Integer> tempAStar = AStar.AlgoAStar(player2, board);
         
         /*------------------------------------------------------*/
-        /*--------------We iterate max of 5 times---------------*/
+        /*--------------We iterate max of "branches" times---------*/
         /*--------------to avoid wide miniMax branches----------*/
         /*------------------------------------------------------*/
         int iter = tempAStar.size();
-        if (iter > 5) iter = 5;
+        if (iter > branches) iter = branches;
         for(int i = 0; i < iter; i++) {
         	
             int x = tempAStar.get(i)%17;

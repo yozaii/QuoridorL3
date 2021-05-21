@@ -29,7 +29,7 @@ public class Tests {
 		//System.out.println (s[0] + "Move: " + s[1]);
 		System.out.println("ALgo:" + AStar.AlgoAStar(p1, board).toString());
 
-		System.out.println("\nOptimalWall2" + OptimalWall.optimalWall2(p1, p2, board).toString());
+		System.out.println("\nOptimalWall2" + OptimalWall.optimalWall2(p1, p2, board, 3).toString());
 		System.out.println(" eval: " + AI.eval(board, p1, p2));
 		
 		

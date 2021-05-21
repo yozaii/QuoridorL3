@@ -132,8 +132,10 @@ public class AI {
 			
 			maxEval = Integer.MIN_VALUE;
 			ArrayList<String> pMoves = p1.possibleMoves();
-			ArrayList<Integer> optWalls =  OptimalWall.optimalWall2(p1, p2, board);
+			ArrayList<Integer> optWalls =  OptimalWall.optimalWall2(p1, p2, board, 5);
+			ArrayList<Integer> optWallsEnemy = OptimalWall.optimalWall2(p2, p1, board, 2);
 			ArrayList<String> combination = UtilList.intStringComb(pMoves, optWalls);
+			combination = UtilList.intStringComb(combination, optWallsEnemy);
 			
 			/*------------------------------------------------------------*/
 			/*--------------Loop to branch all possible moves-------------*/
@@ -218,8 +220,10 @@ public class AI {
 			
 			minEval = Integer.MAX_VALUE;
 			ArrayList<String> pMoves = p2.possibleMoves();
-			ArrayList<Integer> optWalls = OptimalWall.optimalWall2(p2, p1, board);
+			ArrayList<Integer> optWalls = OptimalWall.optimalWall2(p2, p1, board, 5);
+			ArrayList<Integer> optWallsEnemy =  OptimalWall.optimalWall2(p1, p2, board, 2);
 			ArrayList<String> combination = UtilList.intStringComb(pMoves, optWalls);
+			combination = UtilList.intStringComb(combination, optWallsEnemy);
 			
 			/*------------------------------------------------------------*/
 			/*--------------Loop to branch all possible moves-------------*/

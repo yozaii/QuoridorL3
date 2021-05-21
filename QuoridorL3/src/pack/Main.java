@@ -5,7 +5,7 @@ public class Main {
 	public static void main(String args[]) {
 		
 		
-		Interface.menuIA1(1);
+		Interface.menuIA1(7);
 		
 		
 	}
